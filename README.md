@@ -1,4 +1,15 @@
 ## EZEN03
+
+
+
+#### 포트폴리오 테스트 평가용 user  
+ 항목 | 내용 
+|----|----|
+|관리인 아이디|admin1, admin2, admin3, super(최고관리자)|
+|일반 유저 아이디|rotoql|
+|로컬 실행시 가입 활동 가능|통합 PW : 123456|
+
+
 ### Resource information
    1000commit 달성!
     <resources mapping="/assets/**" location="/WEB-INF/views/assets/"/>
@@ -71,10 +82,3 @@
         <resources mapping="/admin/**" location="/WEB-INF/views/admin/"/>
 
 
-
-#### user 관리 
- 항목 | 내용 
-|----|----|
-|관리인 아이디|admin1, admin2, admin3, super(최고관리자)|
-|일반 유저 아이디|rotoql|
-|로컬 실행시 가입 활동 가능|통합 PW : 123456|
