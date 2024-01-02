@@ -1,0 +1,32 @@
+/*
+FileName: myPage_reset_pw.css
+Description: myPage.jsp에서 비밀번호 수정  modal에 적용되는 css입니다.
+Author: 임채린
+*/
+@charset "utf-8";
+
+/* label 설정*/
+label.reset_new_pw {
+	display: inline-block;
+	margin-top: 20px;
+	margin-bottom: 9px;
+	float: left;
+	font-size: 13px;
+	line-height: 15px;
+	width: 100%;
+}
+
+
+/*유효성검사 경고메시지 설정 추가- 임채린*/
+label.uk-alert-danger {
+            display: none;
+            background-color: transparent;
+            padding: 0px;
+            margin: 0px;
+            font-size: 12px;
+        }
+        
+.uk-modal-dialog .uk-button-primary{
+	
+	background-color : black;
+}

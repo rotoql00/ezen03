@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mapper sample file 입니다. -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="buyMapper">
+    <resultMap id="buyMap" type="com.ezen03.tieshoe.model.buyBeans">
+        <!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+        <result property=" buyEnd" column=" buyEnd "/>
+        <result property=" buyFee" column=" buyFee "/>
+        <result property=" buyPrice" column=" buyPrice "/>
+        <result property=" buyProcess" column=" buyProcess "/>
+        <result property=" buySize" column=" buySize "/>
+        <result property=" edit_date" column=" edit_date "/>
+        <result property=" ID" column=" ID "/>
+        <result property=" productNum" column=" productNum "/>
+        <result property=" reg_date" column=" reg_date "/>
+        <result property=" user_ID" column=" user_ID "/>
+        <result property=" search" column=" search "/>
+        <result property=" category" column=" category"/>
+        <result property="orderNum" column="orderNum"/>
+
+        <result property="product_thumb" column="product_thumb"/>
+        <result property="productNameEN" column="productNameEN"/>
+        <result property="orderStatus" column="orderStatus"/>
+        <result property="productNum" column="productNum"/>
+        <result property="productCode" column="productCode"/>
+        <result property="buyHighest260" column="buyHighest260"/>
+        <result property="buyHighest265" column="buyHighest265"/>
+        <result property="buyHighest270" column="buyHighest270"/>
+        <result property="countProduct" column="countProduct"/>
+        <result property="rangeStart" column="rangeStart"/>
+        <result property="rangeEnd" column="rangeEnd"/>
+        <result property="orderReg_date" column="orderReg_date"/>
+
+
+        <result property="offset" column="offset"/>
+        <result property="listCount" column="listCount"/>
+    </resultMap>
+
+    <select id="selectOne"
+            parameterType="com.ezen03.tieshoe.model.buyBeans"
+            resultMap="buyMap">
+            SELECT * FROM buy
+            WHERE ID = #{ID};
+    </select>
+
+    <select id="selectHighest260"
+            parameterType="com.ezen03.tieshoe.model.buyBeans"
+            resultMap="buyMap">
+            SELECT buyPrice AS buyHighest260
+            FROM buy
+            WHERE productNum = #{productNum} AND buySize = 260
+            ORDER BY buyPrice DESC
+            Limit 1;
+    </select>
+
+    <select id="selectHighest265"
+            parameterType="com.ezen03.tieshoe.model.buyBeans"
+            resultMap="buyMap">
+            SELECT buyPrice AS buyHighest265
+            FROM buy
+            WHERE productNum = #{productNum} AND buySize = 265
+            ORDER BY buyPrice DESC
+            Limit 1;
+    </select>
+
+    <select id="selectHighest270"
+            parameterType="com.ezen03.tieshoe.model.buyBeans"
+            resultMap="buyMap">
+            SELECT buyPrice AS buyHighest270
+            FROM buy
+            WHERE productNum = #{productNum} AND buySize = 270
+            ORDER BY buyPrice DESC
+            Limit 1;
+    </select>
+
+    <select id="selectBuyAllPrice"
+            parameterType="com.ezen03.tieshoe.model.buyBeans"
+            resultMap="buyMap">
+        SELECT buySize, buyPrice, COUNT(buyPrice) AS countProduct
+        FROM buy
+        <choose>
+            <when test="buySize == 100">
+                WHERE productNum = #{productNum} AND buyProcess = "N"
+            </when>
+            <otherwise>
+                WHERE productNum = #{productNum} AND buySize = ${buySize} AND buyProcess = "N"
+            </otherwise>
+        </choose>
+        Group By buySize, buyPrice
+        ORDER BY buySize
+
+        <if test="listCount > 0">
+            LIMIT #{offset}, #{listCount}
+        </if>
+    </select>
+
+    <select id="selectCountAll"
+            parameterType="com.ezen03.tieshoe.model.buyBeans"
+            resultType="int">
+        SELECT COUNT(*) FROM buy
+        <choose>
+            <when test="buySize == 100">
+                WHERE productNum = #{productNum} AND buyProcess = "N"
+            </when>
+            <otherwise>
+                WHERE productNum = #{productNum} AND buySize = ${buySize} AND buyProcess = "N";
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="getBuyList"
+            parameterType="com.ezen03.tieshoe.model.buyBeans"
+            resultMap="buyMap">
+        SELECT b.user_ID, p.product_thumb, p.productNameEN, p.productCode, DATE_FORMAT( b.reg_date, "%Y/%m/%d") AS
+        reg_date, b.buyPrice, b.buyEnd, o.buyOrderStatus AS orderStatus, b.productNum, b.buySize, b.buyFee , b.ID,
+        DATE_FORMAT(
+        o.reg_date, "%Y/%m/%d") AS orderReg_date
+        FROM buy AS b
+        left JOIN product
+        AS p ON b.productNum = p.ID
+        left JOIN ordernum
+        AS o ON b.ID = o.buy_ID
+        WHERE b.user_ID = #{user_ID} AND buyOrderStatus IS NULL AND b.reg_date
+        BETWEEN #{rangeStart} AND #{rangeEnd}
+        ORDER BY reg_date
+        <if test="listCount > 0">
+            LIMIT #{offset}, #{listCount};
+        </if>
+    </select>
+
+    <select id="getBuyProcessList"
+            parameterType="com.ezen03.tieshoe.model.buyBeans"
+            resultMap="buyMap">
+        SELECT b.user_ID, p.product_thumb, p.productNameEN, p.productCode, b.buyPrice, b.buyEnd, o.buyOrderStatus AS
+        orderStatus,
+        b.productNum, b.buySize, b.ID, DATE_FORMAT( o.reg_date, "%Y/%m/%d") AS orderReg_date, o.edit_date AS edit_date,
+        o.ID AS orderNum
+        FROM buy AS b
+        left JOIN product
+        AS p ON b.productNum = p.ID
+        left JOIN ordernum
+        AS o ON b.ID = o.buy_ID
+        WHERE b.user_ID = #{user_ID} AND o.buyOrderStatus IS NOT NULL AND b.reg_date
+        BETWEEN #{rangeStart} AND #{rangeEnd}
+        ORDER BY o.reg_date
+        <if test="listCount > 0">
+            LIMIT #{offset}, #{listCount};
+        </if>
+    </select>
+
+    <select id="selectListCount"
+            parameterType="com.ezen03.tieshoe.model.buyBeans"
+            resultType="int">
+            SELECT COUNT(b.ID)
+            FROM buy AS b
+            left JOIN ordernum
+             AS o ON b.ID = o.buy_ID
+            WHERE b.user_ID = #{user_ID} AND o.buyOrderStatus IS NULL
+    </select>
+
+    <select id="selectProcessListCount"
+            parameterType="com.ezen03.tieshoe.model.buyBeans"
+            resultType="int">
+            SELECT COUNT(b.ID)
+            FROM buy AS b
+            left JOIN ordernum
+             AS o ON b.ID = o.buy_ID
+            WHERE b.user_ID = #{user_ID} AND o.buyOrderStatus IS NOT NULL
+    </select>
+
+    <!-- 거래 알림을 위한 기능 정의 ('Y'일 경우 'D'로 변경 'A'일 경우 'B'로 변경)-->
+    <update id="checkBuyProcessY" parameterType="com.ezen03.tieshoe.model.buyBeans">
+       update buy
+       set buyProcess = 'D'
+	   where buyProcess = 'Y' and user_ID =#{ID};
+    </update>
+    
+    <update id="checkBuyProcessA" parameterType="com.ezen03.tieshoe.model.buyBeans">
+       update buy
+       set buyProcess = 'B'
+	   where buyProcess = 'A' and user_ID =#{ID};
+	</update>   
+
+    <select id="buyList"
+            parameterType="com.ezen03.tieshoe.model.buyBeans"
+            resultMap="buyMap">
+        SELECT b.ID, b.buyPrice, b.buyFee, b.reg_date, b.edit_date, b.buyEnd, b.buySize, u.userId AS rangeEnd,
+        u.userName AS rangeStart,
+        p.productCode AS productCode, p.product_thumb AS product_thumb, o.ID AS orderReg_date, o.BuyOrderStatus AS
+        orderStatus, o.SellOrderStatus AS buyHighest260, o.ID AS ordernum FROM buy b
+        INNER JOIN user u ON b.user_ID = u.ID
+        INNER JOIN product p ON b.productNum = p.ID
+        LEFT JOIN ordernum o ON b.ID = o.buy_ID
+        <!--
+            0 = 전체
+            1 = 아이디
+            2 = 이름
+         -->
+        <choose>
+            <when test="category == 1">
+                WHERE u.userId LIKE concat('%', #{search}, '%')
+            </when>
+
+            <when test="category == 2">
+                WHERE u.userName LIKE concat('%', #{search}, '%')
+            </when>
+
+            <otherwise>
+
+            </otherwise>
+        </choose>
+        ORDER BY o.BuyOrderStatus != 7 AND b.reg_date DESC
+
+        <if test="listCount > 0">
+            LIMIT #{offset}, #{listCount};
+        </if>
+    </select>
+
+    <select id="buyListCount"
+            parameterType="com.ezen03.tieshoe.model.buyBeans"
+            resultType="int">
+        SELECT COUNT(*)FROM buy b
+        INNER JOIN user u ON b.user_ID = u.ID
+        LEFT JOIN ordernum o ON b.ID = o.buy_ID
+
+        <choose>
+            <when test="category == 1">
+                WHERE u.userId LIKE concat('%', #{search}, '%')
+            </when>
+
+            <when test="category == 2">
+                WHERE u.userName LIKE concat('%', #{search}, '%')
+            </when>
+
+            <otherwise>
+
+            </otherwise>
+        </choose>
+    </select>
+
+    <insert id="addBuy"
+            parameterType="com.ezen03.tieshoe.model.buyBeans"
+            useGeneratedKeys="true" keyProperty="ID">
+            INSERT INTO buy (buyPrice, buyFee, productNum, user_ID, reg_date, buyProcess, buyEnd, buySize)
+            VALUES (#{buyPrice}, #{buyFee}, #{productNum}, #{user_ID}, CURDATE(), #{buyProcess}, #{buyEnd}, #{buySize});
+    </insert>
+
+    <update id="updateBuyStatus" parameterType="com.ezen03.tieshoe.model.buyBeans">
+       update buy
+       set buyProcess = 'Y'
+	   where ID = #{ID}
+    </update>
+
+    <select id="check"
+            parameterType="com.ezen03.tieshoe.model.buyBeans"
+            resultMap="buyMap">
+            SELECT * FROM buy
+            WHERE productNum = #{productNum} AND user_ID = #{user_ID} AND buySize = #{buySize} AND buyProcess = "N"
+            Limit 1;
+    </select>
+
+    <update id="updateBuyPrice" parameterType="com.ezen03.tieshoe.model.buyBeans">
+        UPDATE buy
+        SET buyPrice = #{buyPrice}, buyFee = #{buyFee}, edit_date = CURDATE() WHERE ID = #{ID};
+    </update>
+
+    <delete id="deleteBuy"
+            parameterType="com.ezen03.tieshoe.model.buyBeans">
+        DELETE FROM buy WHERE ID = #{ID} AND buyProcess = "N";
+    </delete>
+
+    <update id="terminate" parameterType="com.ezen03.tieshoe.model.buyBeans">
+            UPDATE buy
+            SET buyProcess = #{buyProcess}
+            WHERE ID = #{ID};
+    </update>
+    
+    <!-- 유저 구매 확인 -->
+     <select id="buyUserCount"
+            parameterType="com.ezen03.tieshoe.model.buyBeans"
+            resultType="int">
+            SELECT COUNT(*)
+            FROM buy 
+            WHERE user_ID = #{user_ID};
+    </select>
+</mapper>

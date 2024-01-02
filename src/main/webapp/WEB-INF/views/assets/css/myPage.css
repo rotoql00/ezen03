@@ -1,0 +1,222 @@
+/*
+FileName: myPage.css
+Description: 개인 정보 관리에 대한 CSS입니다.
+Author: 임석현
+ */
+
+/*전체 크기를 설정합니다.*/
+.container {
+	width: 75%;
+	margin: auto;
+	padding-top: 50px;
+	height: 1000px;
+}
+
+/* 최 상단의 타이틀을 가운데 정렬하고 글씨를 굵게 합니다.*/
+.myPage_title {
+	text-align: center;
+	font-weight: bolder;
+}
+
+/* 상단 서브 메뉴 가운데 정렬을 위한 width*/
+.container .myPage_subnav {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* 상단 서브 메뉴를 가운데 정렬*/
+.container .mypage_center {
+	width: 268px;
+	margin: 60px auto;
+}
+
+/*상위 타이틀*/
+.myPage_info_title {
+	margin: 50px 0 10px;
+	font-size: 20px;
+	font-weight: bold;
+	display: block;
+	clear: both;
+}
+
+/*제목*/
+.myPage_subtitle {
+	width: 15%;
+	float: left;
+	margin-top: 18px;
+	font-weight: bold;
+}
+
+/* 내용*/
+.myPage_subtext {
+	float: left;
+	margin-top: 19px;
+	font-size: 14px;
+}
+
+/*버튼 */
+.myPage_button {
+	float: right;
+}
+
+/* 버튼 색깔과 디자인 설정*/
+.container .uk-button {
+	border-radius: 10px;
+	background-color: black;
+	margin: 7px 0;
+	width: 150px;
+}
+
+/* 버튼 hover했을때에 색깔 교체*/
+.container .uk-button:hover {
+	border-radius: 10px;
+	background-color: #767676;
+	margin: 7px 0;
+	width: 150px;
+}
+
+/* 버튼 클릭했을떄 (focus) 색깔 수정*/
+.container .uk-button:focus {
+	border-radius: 10px;
+	background-color: #767676;
+	margin: 7px 0;
+	width: 150px;
+}
+
+/*회원 탈퇴버튼 색상 교체*/
+.container .myPage_submit .red {
+	border-radius: 10px;
+	background-color: red;
+	margin: 7px 0;
+}
+
+/*회원탈퇴와 변경완료버튼을 오른쪽으로 고정*/
+.myPage_submit {
+	margin-top: 50px;
+	float: right;
+}
+
+/* 정보수신동의 정보 오른쪽으로 정렬*/
+.mypage_expain {
+	margin: 17px 0;
+	float: right;
+}
+
+/*이름과 체크박스 위치 설정*/
+.mypage_expain_info {
+	margin-top: 14px;
+}
+
+/* hr reset & 색상*/
+.hr_bold {
+	width: 100%;
+	border: .5px solid black;
+	clear: both;
+	margin: 0px;
+}
+
+/* hr reset & 색상*/
+.hr_fade {
+	width: 100%;
+	border: .5px solid #cae8e5;
+	clear: both;
+	margin: 0px;
+}
+
+.uk-modal-body .uk-form-width-small {
+	width: 100px;
+	border-radius: 5px;
+}
+
+.uk-modal-body
+ 
+.uk-input
+,
+.uk-select
+:not
+ 
+(
+[
+multiple
+]
+ 
+)
+:not
+ 
+(
+[
+size
+]
+ 
+)
+{
+height
+:
+ 
+42
+px
+;
+
+
+}
+.hypen {
+	display: inline-block;
+	font-size: 50px;
+}
+
+.phone_select, .phone_blank {
+	display: inline-block;
+}
+
+.phone_select {
+	margin-bottom: -17px;
+}
+
+#phone_number_change {
+	width: 100%;
+}
+
+.phone_number_container {
+	margin-left: 19%;
+}
+
+.phone_number_info {
+	margin-left: 19%;
+	font-size: 14px;
+	margin-bottom: -5px;
+}
+
+.userBank {
+	margin: 10px 0px 10px 0px;
+	display: inline-block;
+}
+
+.userBankInput {
+	height: 42px;
+	vertical-align: middle;
+	display: inline-block;
+	max-width: 100%;
+	width: 100%;
+	padding: 0 10px;
+	background: #fff;
+	color: #666;
+	border: 1px solid #e5e5e5;
+	transition: .2s ease-in-out;
+	transition-property: color, background-color, border;
+	overflow: visible;
+	box-sizing: border-box;
+	margin: 0;
+	border-radius: 0;
+	font: inherit;
+	margin: 0px 0px 20px 0px;
+}
+
+div.nice-select.userBankselect {
+	margin: 0px 300px 0px 0px !important;
+}
+
+.uk-button .uk-button-danger red {
+	text-decoration: none; 
+	color:white;
+}

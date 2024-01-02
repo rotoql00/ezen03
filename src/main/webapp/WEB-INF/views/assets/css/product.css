@@ -1,0 +1,333 @@
+/*
+FileName: product.css
+Description: 상세 상품에 대한 CSS입니다.
+Author: 임석현
+ */
+
+/*이미지 잡는 css구문*/
+img {
+    width: 80%;
+}
+
+/*위로 밀리는 현상으로 인해 margin을 주었습니다.*/
+#container {
+    width: 100%;
+    margin: 100px 0 0 7%;
+}
+
+.product_title_fake {
+    display: none;
+}
+
+/*이미지를 품고있는 container */
+#left_container {
+    float: left;
+    width: 50%;
+    /* 이미지가 밑에 있어 위로 떙겼습니다*/
+    margin-top: -100px;
+}
+
+/*이미지 외 나머지 info를 담고있는 container*/
+.right_container {
+    float: left;
+    width: 35%;
+}
+
+/*상품 이름 */
+.product_name {
+    line-height: 30px;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+/*상품 이름(한국어)*/
+.product_name_ko {
+    line-height: 50px;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+/* 상태와 검수에 대한 CSS*/
+.product_title span {
+    font-size: 13px;
+}
+
+/* 이용안내 버튼 입니다.*/
+.userGuidebutton {
+    color: blue;
+    border: none;
+    background-color: unset;
+    text-decoration: underline;
+    font-size: 12px;
+}
+
+/* 두개의 버튼에 대한 container*/
+.sell_buy_button {
+    margin-top: 45px;
+}
+
+/* 두개의 버튼에 대한 기본 속성*/
+.product_button {
+    height: 50px;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    border-radius: 4px;
+    font-family: Roboto, sans-serif;
+    font-size: 15px;
+    line-height: 30px;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    width: 49%;
+    letter-spacing: 1px;
+}
+
+/* BUY 버튼의 색상과 폰트 스타일 지정*/
+#product_buy {
+    background-color: #283471;
+    color: white;
+    font-weight: bold;
+}
+
+/* SELL 버튼의 색상과 폰트 스타일 지정*/
+#product_sell {
+    background-color: #e72525;
+    color: white;
+    font-weight: bold;
+}
+
+/* how to use (이용안내) container에 대한 css구문입니다.*/
+.howToUse {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* line-height가 기본으로 27px이므로 15px로 재 설정하였습니다.*/
+.howToUse p {
+    line-height: 15px;
+}
+
+.product_allprice {
+    margin-top: 100px;
+}
+
+/* 옵션별 가격의 줄을 설정합니다*/
+.option_2 {
+    float: left;
+    margin-bottom: 12px;
+    font-weight: bold;
+}
+
+/* 거래가격 판매가현황 입찰가현황을 설정합니다.*/
+.current_status {
+    float: right;
+    margin-left: 10px;
+    font-size: 13px;
+    border: none;
+    background-color: unset;
+    cursor: pointer;
+}
+
+/*모든 테이블에 대한 기본 설정입니다.*/
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+/*옵션별 가격 row에 대한 설정입니다.*/
+.element_table {
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.element_table td, .element_table th {
+    text-align: center;
+    padding: 20px;
+}
+
+/* 첫번째 row에 대한 설정입니다.*/
+.element_table:nth-child(1) {
+    border-bottom: 1px solid black;
+    border-top: 1px solid #ddd;
+}
+
+.product_more {
+    background-color: unset;
+    border: none;
+    font-size: 15px;
+    color: grey;
+}
+
+/* 최고입찰가 font color을 파란색으로 바꾸기 위한 CSS구문입니다.*/
+.blue {
+    color: blue;
+    font-size: 17px;
+    font-weight: lighter;
+}
+
+/* 옵션 최근거래가에 사이즈에 대한 폰트조정을 하기위한 CSS구문입니다.*/
+#product_size_1, #product_size_2, #product_size_3 {
+    font-size: 21px;
+}
+
+#product_price_low_1, #product_price_low_2, #product_price_low_3 {
+    font-size: 17px;
+    color: red;
+    font-weight: lighter;
+}
+
+/* 상품정보에 대한 CSS 시작*/
+.product_detail {
+    margin-top: 100px;
+}
+
+/* 상품정보 p에 대한 CSS*/
+.product_detail p {
+    font-weight: bold;
+}
+
+/* table에 대한 CSS 속성입니다*/
+.product_detail table {
+    margin-top: 30px;
+    min-height: 160px;
+    text-align: left;
+}
+
+/*글씨에 두께를 두껍게*/
+.bold {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#product_style, #product_color, #product_release_date, #product_release_price {
+    font-size: 15px;
+    font-weight: lighter;
+}
+
+/* 1년간 판매 이력 시작*/
+.product_detail {
+    min-height: 300px;
+}
+
+.product_price {
+    min-height: 100px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.product_price p {
+    font-size: 17px;
+    font-weight: lighter;
+}
+
+.product_price span {
+    font-size: 30px;
+}
+
+.max {
+    color: #fca496;
+}
+
+.min {
+    color: #008dd8;
+}
+
+/* hr에 색상을 입히는 css 구문입니다.*/
+.hr_fade {
+    width: 100%;
+    border: .5px solid #ddd;
+}
+
+.hr_solid {
+    width: 100%;
+    border: .5px solid black;
+}
+
+/*hr속성 끝*/
+.blank {
+    min-height: 500px;
+}
+
+/* 1070 이하로 내려갔을때 이름 위로 올리기*/
+@media (max-width: 1070px) {
+    #container {
+        width: 100%;
+        margin: auto;
+    }
+
+    #left_container {
+        width: auto;
+        /* 이미지가 밑에 있어 위로 떙겼습니다*/
+        margin-top: 100px;
+        margin-left: 20%;
+    }
+
+    /*이미지 외 나머지 info를 담고있는 container*/
+    .right_container {
+        width: 80%;
+        text-align: center;
+        margin-left: 10%;
+    }
+
+    #product_title {
+        display: none;
+    }
+
+    .product_title_fake {
+        width: 100%;
+        margin-top: 50px;
+        display: block;
+        text-align: center;
+    }
+
+    .product_name_fake {
+        line-height: 30px;
+        font-size: 21px;
+        font-weight: bold;
+    }
+
+    /*상품 이름(한국어)*/
+    .product_name_ko_fake {
+        line-height: 50px;
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+
+    /* 상태와 검수에 대한 CSS*/
+    .product_title_fake span {
+        font-size: 13px;
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+.bottom_container {
+    clear: both;
+    margin-left: 5%;
+}
+
+.overlay {
+    position: absolute;
+    width: 35%;
+    height: 350px;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.overlay_text {
+    position: absolute;
+    color: black;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    left: 75%;
+    transform: translate(-50%, -50%);
+    margin-top: 170px;
+
+}
+

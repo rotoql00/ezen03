@@ -1,0 +1,104 @@
+@charset "UTF-8";/*
+작성자: 이경섭
+내용: FAQ.html의 CSS 파일이며 내용을 숨기고 꺼내고 하는 내용이 담겨져있음
+ */
+
+*{
+    text-decoration: none;
+    box-sizing: border-box;
+}
+/*input id값에 answer을 포함하고있는 input값에 설정*/
+input[id*="answer"]{
+    display: none;
+}
+/*input id값에 answer을 포함하고있는 input값과 + label 설정*/
+input[id*="answer"] + label{
+    display: block;
+    padding: 20px;
+    border-bottom: 1px solid #f1f1f1;
+    border-top: 1px solid #f1f1f1;
+    color: black;
+    font-weight: 900;
+    cursor: pointer;
+    position: relative;
+}
+
+/*input id값에 answer을 포함하고있는 input + label + div 설정(내용이 안보이게 하는설정)*/
+input[id*="answer"] + label + div {
+    max-height: 0px;
+    transition: all .35s;
+    overflow: hidden;
+    background: #f1f1f1;
+    font-size: 11px;
+}
+/*input id값에 answer을 포함하고있는 input + label + div p(내용)설정*/
+input[id*="answer"] + label + div p {
+    display: inline-block;
+    padding: 20px;
+    white-space: pre-line;
+    line-height: 20px;
+
+}
+/*제목을 눌렀을때 숨어져있는 내용을 나오게하는 것의 값설정*/
+input[id*="answer"]:checked + label + div {max-height: 1000px;}
+
+#faqcontainer{
+    padding-top: 30px;
+    min-height: 1000px;
+}
+
+#list{
+    width: 90%;
+    margin: auto;
+    padding-bottom: 20px;
+
+}
+
+#list #totaltab{
+    width: 100%;
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
+
+#list #totaltab .uk-active a{
+    border-bottom: black solid 1px;
+}
+
+#totaltab ul{
+    justify-content: center;
+}
+/*FAQ 게시판 설정*/
+#faqlist{
+    margin: auto;
+    width: 70%;
+    text-align: left;
+}
+
+#faqlist label p{
+    display: inline-block;
+}
+
+#faqlist div p{
+    font-size: 14px;
+}
+
+#faqlist label:hover{
+    background-color:#f1f1f1;
+}
+
+#bordernum{
+    width: 100%;
+    height: 40px;
+    text-align: center;
+}
+
+#bordernum .uk-pagination{
+    font-size: 16px;
+    height: 40px;
+    margin: auto;
+}
+
+#bordernum ul{
+    justify-content: center;
+}
+

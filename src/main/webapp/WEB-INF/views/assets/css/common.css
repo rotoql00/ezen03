@@ -1,0 +1,68 @@
+/*
+FileName: common.css
+Description: 모든 HTML에 사용되는 common css
+Author: 임석현
+ */
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700&display=swap');
+
+/*font를 교체하고 reset.css에서 가져왔습니다.*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    font-family: 'Nanum Gothic', sans-serif;
+
+}
+
+body{
+    /*스크롤을 보이지 않게끔 하는 CSS 속성입니다. */
+    overflow: scroll;
+    overflow-x: hidden;
+    /*드래그를 막았습니다.*/
+    -webkit-user-select: none !important;
+    -moz-user-select: -moz-none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+}
+
+/*스크롤바를 보이지 않게 하는 속성입니다.*/
+::-webkit-scrollbar {
+    display: none;
+}
+
+/*float 속성을 없애는 기능입니다.*/
+.clear::after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+.no-drag {-ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;}
+
+div .selectric{
+    background: none!important;
+    border: none!important;
+}
+
+.uk-modal {
+    z-index: 9999;
+}
+
+.swal2-container {
+    z-index: 10000;
+}

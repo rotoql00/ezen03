@@ -1,0 +1,40 @@
+/*
+FileName: myPage_change_addr.css
+Description: myPage.jsp에서 배송정보를 수정하는 modal에 적용되는 css입니다..
+Author: 최성준
+*/
+@charset "utf-8";
+
+/* 유효성 정규식 검사후 출력되는 error label */
+label.error {
+	display: none;
+}
+
+/* 우편번호 , 도로명주소 input box*/
+input.zip_code, input.addr_1 {
+	background-color: #c8c8c8c8;
+}
+
+/* 수취인이름, 휴대폰번호, 주소  라벨*/
+label.change_addr_info {
+	display: inline-block;
+	margin-top: 20px;
+	margin-bottom: 9px;
+	float: left;
+	font-size: 13px;
+	line-height: 15px;
+	width: 100%;
+}
+
+/* input박스 */
+input.uk-input.change_user_info {
+	max-width: none;
+	width: 230%;
+}
+
+/* 취소 변경 버튼 */
+div.uk-modal-footer.uk-text-right.myPage_change_addr_button {
+	margin-top: 20px;
+	padding:20px 0px 0px 0px;
+	
+}

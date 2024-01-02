@@ -1,0 +1,43 @@
+div .myPage_username_background .icon_nut {
+    color: cornflowerblue;
+}
+
+.myPage_pen_button {
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    width: 40%;
+    background-color: skyblue;
+    float: left;
+    height: 30px;
+    color: white;
+}
+
+.level_circle_active_Buy{
+    width: 35px;
+    line-height: 35px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 17px;
+    font-weight: bold;
+    background-color: cornflowerblue;
+    display: inline-block;
+    color: white;
+    margin-right: 5px;
+}
+
+.push {
+    margin-top: 100px;
+}
+
+.shoeImg {
+    max-width: unset;
+}
+
+.gap {
+    margin: 5px;
+}
+
+.none {
+	display: none !important;
+	}

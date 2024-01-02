@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mapper sample file 입니다. -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="complexMapper">
+    <resultMap id="complexMap" type="com.ezen03.tieshoe.model.complexBeans">
+        <!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+        <result property="productNum" column="productNum"/>
+        <result property="buyHighPrice" column="buyHighPrice"/>
+        <result property="buyRecentPrice" column="buyRecentPrice"/>
+        <result property="buyLowPrice" column="buyLowPrice"/>
+        <result property="size" column="size"/>
+        <result property="user_ID" column="user_ID"/>
+        <result property="ID" column="ID"/>
+
+    </resultMap>
+
+    <select id="buyButtonBuy"
+            parameterType="com.ezen03.tieshoe.model.complexBeans"
+            resultMap="complexMap">
+            SELECT buySize AS size, MAX(buyPrice) AS buyHighPrice  FROM buy
+            WHERE productNum = #{productNum} AND buyProcess = 'N'
+            GROUP BY buySize
+            ORDER BY buySize;
+</select>
+
+    <select id="buyButtonSell"
+            parameterType="com.ezen03.tieshoe.model.complexBeans"
+            resultMap="complexMap">
+            SELECT sellSize AS size, MIN(sellPrice) AS buyLowPrice  FROM sell
+            WHERE productNum = #{productNum} AND sellProcess = 'N'
+            GROUP BY sellSize
+            ORDER BY sellSize;
+</select>
+
+    <select id="buyButtonOrder"
+            parameterType="com.ezen03.tieshoe.model.complexBeans"
+            resultMap="complexMap">
+            SELECT orderSize AS size, MAX(orderPrice) AS buyRecentPrice  FROM ordernum
+            WHERE orderProductNum = #{productNum} AND BuyOrderStatus = 7 AND reg_date IN (SELECT MAX(reg_date) FROM ordernum  GROUP BY orderSize)
+            GROUP BY orderSize
+            ORDER BY orderSize;
+</select>
+
+    <select id="buyPageHigh"
+            parameterType="com.ezen03.tieshoe.model.complexBeans"
+            resultMap="complexMap">
+            SELECT MAX(buyPrice) AS buyHighPrice, ID, user_ID FROM buy
+            WHERE productNum = #{productNum} AND buySize = #{size} AND buyProcess = "N"
+            GROUP BY ID
+            LIMIT 0,1;
+</select>
+
+    <select id="buyPageLow"
+            parameterType="com.ezen03.tieshoe.model.complexBeans"
+            resultMap="complexMap">
+            SELECT MIN(sellPrice) AS buyLowPrice, ID, user_ID FROM sell
+            WHERE productNum = #{productNum} AND sellSize = #{size} AND sellProcess = "N"
+            GROUP BY ID
+            LIMIT 0,1;
+    </select>
+
+    <select id="sellPageLow"
+            parameterType="com.ezen03.tieshoe.model.complexBeans"
+            resultMap="complexMap">
+            SELECT MIN(buyPrice) AS buyHighPrice, ID, user_ID FROM buy
+            WHERE productNum = #{productNum} AND buySize = #{size} AND buyProcess = "N"
+            GROUP BY ID
+            LIMIT 0,1;
+</select>
+
+    <select id="sellPageHigh"
+            parameterType="com.ezen03.tieshoe.model.complexBeans"
+            resultMap="complexMap">
+            SELECT MAX(sellPrice) AS buyLowPrice, ID, user_ID FROM sell
+            WHERE productNum = #{productNum} AND sellSize = #{size} AND sellProcess = "N"
+            GROUP BY ID
+            LIMIT 0,1;
+    </select>
+</mapper>

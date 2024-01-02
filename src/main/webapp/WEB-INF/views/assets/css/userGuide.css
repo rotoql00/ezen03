@@ -1,0 +1,25 @@
+#container{
+    padding-top: 30px;
+    min-height: 1000px;
+
+}
+
+#totaltab .uk-active a{
+    border-bottom: black solid 1px;
+}
+
+#totaltab{
+    width: 100%;
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
+
+#totaltab ul{
+    justify-content: center;
+}
+
+#Guide{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}

@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mapper sample file 입니다. -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userMapper">
+    <!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+    <resultMap id="userMap"
+               type="com.ezen03.tieshoe.model.userBeans">
+        <!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+        <result property="ID" column="ID"/>
+        <result property="userId" column="userId"/>
+        <result property="userPw" column="userPw"/>
+        <result property="userName" column="userName"/>
+        <result property="userPhonenum" column="userPhonenum"/>
+        <result property="userBirthDate" column="userBirthDate"/>
+        <result property="userEmail" column="userEmail"/>
+        <result property="userZipcode" column="userZipcode"/>
+        <result property="userAddress1" column="userAddress1"/>
+        <result property="userAddress2" column="userAddress2"/>
+        <result property="reg_date" column="reg_date"/>
+        <result property="edit_date" column="edit_date"/>
+        <result property="userAdmin" column="userAdmin"/>
+        <result property="userForm" column="userForm"/>
+        <result property="userAccountBank" column="userAccountBank"/>
+        <result property="userAccountNum" column="userAccountNum"/>
+        <result property="userdropTF" column="userdropTF"/>
+        <result property="user_penalty" column="user_penalty"/>
+        <result property="emailCheck" column="emailCheck"/>
+        <result property="userLevel" column="userLevel"/>
+        <result property="couponCount" column="couponCount"/>
+        <result property="penaltyDate" column="penaltyDate"/>
+
+        <result property="offset" column="offset"/>
+        <result property="listCount" column="listCount"/>
+        <result property="search" column="search"/>
+        <result property="category" column="category"/>
+        <result property="countShipping" column="countShipping"/>
+        <result property="countCoupon" column="countCoupon"/>
+    </resultMap>
+
+    <select id="countAllUser"
+            parameterType="com.ezen03.tieshoe.model.userBeans" resultType="int">
+        SELECT COUNT(*) FROM user
+	</select>
+
+    <!-- 아이디 중복 확인 기능 정의 -->
+    <!-- select count(*) from professor where userid="choi"; select userId from
+        user where userId=#{userId}; -->
+    <select id="checkId"
+            parameterType="com.ezen03.tieshoe.model.userBeans" resultType="int">
+		select count(*) 
+		from user
+		where userId=#{userId};
+	</select>
+
+    <!-- 주소 조회 기능 -->
+    <select id="userAddr"
+            parameterType="com.ezen03.tieshoe.model.userBeans" resultType="int">
+            SELECT userZipcode, userAddress1,userAddress2 
+            FROM user 
+            where ID = #{ID};
+	</select>
+
+    <!-- 이메일 중복 확인 기능 정의 -->
+    <select id="checkEmail"
+            parameterType="com.ezen03.tieshoe.model.userBeans" resultType="int">
+		select count(*) from user
+		where userEmail=#{userEmail};
+	</select>
+
+    <!-- 휴대폰번호 중복 확인 기능 정의 -->
+    <select id="checkPhonenum"
+            parameterType="com.ezen03.tieshoe.model.userBeans" resultType="int">
+		select count(*) from user
+		where userPhonenum=#{userPhonenum};
+	</select>
+
+    <!-- 단일행 조회를 위한 기능 정의 -->
+    <select id="selectItem"
+            parameterType="com.ezen03.tieshoe.model.userBeans" resultMap="userMap">
+		select * from user
+		where ID=#{ID};
+	</select>
+
+    <!-- 데이터 저장을 위한 기능 정의 -->
+    <insert id="insertItem"
+            parameterType="com.ezen03.tieshoe.model.userBeans"
+            useGeneratedKeys="true" keyProperty="ID">
+		INSERT
+		INTO User
+		(userId,userPw,userName,userPhonenum,userBirthDate,userEmail,userZipcode,userAddress1,userAddress2,reg_date)
+		VALUES(#{userId},md5(#{userPw}),#{userName},#{userPhonenum},#{userBirthDate},#{userEmail},#{userZipcode},#{userAddress1},#{userAddress2},now());
+	</insert>
+	
+	 <!-- 관리자 추가 기능 정의 -->
+    <insert id="addAdmin"
+            parameterType="com.ezen03.tieshoe.model.userBeans"
+            useGeneratedKeys="true" keyProperty="ID">
+		INSERT
+		INTO User
+		(userId,userPw,userName,userPhonenum,userBirthDate,userEmail,userZipcode,userAddress1,userAddress2,userAdmin,userLevel,reg_date)
+		VALUES
+		(#{userId},md5(#{userPw}),#{userName},#{userPhonenum},#{userBirthDate},#{userEmail},#{userZipcode},#{userAddress1},#{userAddress2},"Y",#{userLevel},now());
+	</insert>
+
+    <!-- 설문 조사 결과를 저장하기 위한 기능 정의 -->
+    <update id="insertUserForm"
+            parameterType="com.ezen03.tieshoe.model.userBeans">
+		update
+		user set
+		userForm = #{userForm},
+		edit_date = now()
+		where ID=#{ID};
+	</update>
+
+    <!-- 비밀변호 변경 하기 위한 기능 정의 -->
+    <update id="changeUserPw"
+            parameterType="com.ezen03.tieshoe.model.userBeans">
+		update user set
+		userPw = md5(#{userPw}),
+		edit_date = now()
+		where ID=#{ID};
+	</update>
+
+    <!-- 데이터 갱신을 위한 기능 정의 -->
+    <update id="updateItem"
+            parameterType="com.ezen03.tieshoe.model.userBeans">
+		UPDATE user
+		SET
+		userId=#{userId},
+		userPw=md5(#{userPw}),
+		userName=#{userName},
+		userPhonenum=#{userPhonenum},
+		userBirthDate=#{userBirthDate},
+		userEmail=#{userEmail},
+		userZipcode=#{userZipcode},
+		userAddress1=#{userAddress1},
+		userAddress2=#{userAddress2},
+		edit_date = now()
+		WHERE ID=#{ID};
+	</update>
+
+    <!-- 데이터 갱신을 위한 기능 정의 -->
+    <update id="updateAddr"
+            parameterType="com.ezen03.tieshoe.model.userBeans">
+		UPDATE user
+		SET
+		userZipcode=#{userZipcode},
+		userAddress1=#{userAddress1},
+		userAddress2=#{userAddress2},
+		edit_date = now()
+		WHERE ID=#{ID};
+	</update>
+
+    <!-- 은행 데이터 갱싱을 위한 기능 정의 -->
+    <update id="updateBank"
+            parameterType="com.ezen03.tieshoe.model.userBeans">
+		UPDATE user
+		SET
+		userAccountBank=#{userAccountBank},
+		userAccountNum=#{userAccountNum},
+		edit_date = now()
+		WHERE ID=#{ID};
+	</update>
+
+    <!-- 유저 탈퇴를 위한 기능 정의 -->
+    <update id="dropUser"
+            parameterType="com.ezen03.tieshoe.model.userBeans">
+		UPDATE user
+		SET
+		userdropTF="Y",
+		edit_date = now()
+		WHERE ID=#{ID};
+	</update>
+
+    <!-- 관리자 삭제 를 위한 기능 정의 -->
+    <delete id="dropAdmin"
+            parameterType="com.ezen03.tieshoe.model.userBeans">
+			DELETE FROM user WHERE ID = #{ID};
+	</delete>
+
+    <!-- 데이터 삭제를 위한 기능 정의 -->
+    <delete id="deleteItem"
+            parameterType="com.ezen03.tieshoe.model.userBeans">
+		DELETE FROM user
+		WHERE ID=#{ID};
+	</delete>
+
+    <!-- 아이디와 그에 맞는 이메일을 조회하기 위한 기능 정의 -->
+    <select id="checkIDEmail"
+            parameterType="com.ezen03.tieshoe.model.userBeans" resultMap="userMap">
+		SELECT ID, userdropTF
+		FROM user
+		WHERE userId=#{userId} AND userEmail=#{userEmail};
+	</select>
+
+    <select id="getEmail"
+            parameterType="com.ezen03.tieshoe.model.userBeans" resultMap="userMap">
+		select userEmail , userName
+		from user
+		where ID = #{ID};
+	</select>
+
+    <select id="getBuyInfo"
+            parameterType="com.ezen03.tieshoe.model.userBeans" resultMap="userMap">
+		SELECT
+		userID, (SELECT COUNT(*) FROM ordernum WHERE buyOrderStatus = 7 AND buy_user_ID = #{ID}) AS
+		countShipping,
+		(SELECT COUNT(*) FROM coupon WHERE coupon_used = 'N' AND user_ID = #{ID}) AS
+		countCoupon
+		FROM user
+		WHERE ID = #{ID};
+	</select>
+
+    <!-- 이메일 인증후 로그인 권한을 주기 위한 기능정의 -->
+    <update id="emailAuth"
+            parameterType="com.ezen03.tieshoe.model.userBeans">
+		UPDATE user
+		SET
+		emailCheck = "Y"
+		WHERE ID=replace(#{ID}," ","0");
+	</update>
+
+    <select id="getSellInfo"
+            parameterType="com.ezen03.tieshoe.model.userBeans" resultMap="userMap">
+		SELECT
+		userLevel
+		FROM user
+		WHERE user.ID = #{ID};
+	</select>
+
+    <select id="getSurvey"
+            parameterType="com.ezen03.tieshoe.model.userBeans" resultMap="userMap">
+		SELECT
+		userForm
+		FROM user
+		WHERE user.ID = #{ID};
+	</select>
+
+    <!-- 관리자 사용자 검색의 페이징을 위함 -->
+    <select id="userAll"
+            parameterType="com.ezen03.tieshoe.model.userBeans"
+            resultMap="userMap">
+        SELECT userId, userPhonenum, userName, userEmail, userAddress1, userdropTF, u.reg_date, user_penalty,
+        emailCheck, userLevel, userAddress2, u.edit_date, u.ID,
+        (SELECT COUNT(*) FROM coupon
+        WHERE u.ID = c.user_ID AND coupon_used = "N" AND couponType = 1) AS couponCount FROM user u
+        LEFT JOIN coupon c ON c.user_ID = u.ID
+        <!--
+        0 = 전체
+        1 = 아이디
+        2 = 이름
+        3 = 전화번호
+        -->
+        <choose>
+            <when test="category == 1">
+                WHERE u.userId LIKE concat('%', #{search}, '%') AND userAdmin = "N"
+            </when>
+
+            <when test="category == 2">
+                WHERE u.userName LIKE concat('%', #{search}, '%') AND userAdmin = "N"
+            </when>
+
+            <when test="category == 3">
+                WHERE u.userPhonenum LIKE concat('%', #{search}, '%') AND userAdmin = "N"
+            </when>
+
+            <otherwise>
+                WHERE userAdmin = "N"
+            </otherwise>
+        </choose>
+        <!-- 정상적인 회원을 앞으로 배치합니다 -->
+        ORDER BY user_penalty = "N" OR emailCheck = "Y" DESC
+
+        <if test="listCount > 0">
+            LIMIT #{offset}, #{listCount}
+        </if>
+    </select>
+
+    <!-- 관리자 검색을 위한 구문-->
+    <select id="userCount"
+            parameterType="com.ezen03.tieshoe.model.userBeans"
+            resultType="int">
+        SELECT COUNT(*) FROM user AS u
+        <!--
+        0 = 전체
+        1 = 아이디
+        2 = 이름
+        3 = 전화번호
+        -->
+        <choose>
+            <when test="category == 1">
+                WHERE u.userId LIKE concat('%', #{search}, '%') AND userAdmin = "N"
+            </when>
+
+            <when test="category == 2">
+                WHERE u.userName LIKE concat('%', #{search}, '%') AND userAdmin = "N"
+            </when>
+
+            <when test="category == 3">
+                WHERE u.userPhonenum LIKE concat('%', #{search}, '%') AND userAdmin = "N"
+            </when>
+
+            <otherwise>
+                WHERE userAdmin = "N"
+            </otherwise>
+        </choose>
+    </select>
+
+    <!-- 관리자 사용자 검색의 페이징을 위함 -->
+    <select id="adminAll"
+            parameterType="com.ezen03.tieshoe.model.userBeans"
+            resultMap="userMap">
+        SELECT userId, userPhonenum, userName, userEmail, reg_date, userLevel, ID FROM user
+        <!--
+        0 = 전체
+        1 = 아이디
+        2 = 이름
+        3 = 전화번호
+        -->
+        <choose>
+            <when test="category == 1">
+                WHERE u.userId LIKE concat('%', #{search}, '%') AND userAdmin = "Y"
+            </when>
+
+            <when test="category == 2">
+                WHERE u.userName LIKE concat('%', #{search}, '%') AND userAdmin = "Y"
+            </when>
+
+            <when test="category == 3">
+                WHERE u.userPhonenum LIKE concat('%', #{search}, '%') AND userAdmin = "Y"
+            </when>
+
+            <otherwise>
+                WHERE userAdmin = "Y"
+            </otherwise>
+        </choose>
+
+        <if test="listCount > 0">
+            LIMIT #{offset}, #{listCount}
+        </if>
+    </select>
+
+    <!-- 관리자 검색을 위한 구문-->
+    <select id="adminCount"
+            parameterType="com.ezen03.tieshoe.model.userBeans"
+            resultType="int">
+        SELECT COUNT(*) FROM user
+        <!--
+        0 = 전체
+        1 = 아이디
+        2 = 이름
+        3 = 전화번호
+        -->
+        <choose>
+            <when test="category == 1">
+                WHERE u.userId LIKE concat('%', #{search}, '%') AND userAdmin = "Y"
+            </when>
+
+            <when test="category == 2">
+                WHERE u.userName LIKE concat('%', #{search}, '%') AND userAdmin = "Y"
+            </when>
+
+            <when test="category == 3">
+                WHERE u.userPhonenum LIKE concat('%', #{search}, '%') AND userAdmin = "Y"
+            </when>
+
+            <otherwise>
+                WHERE userAdmin = "Y"
+            </otherwise>
+        </choose>
+    </select>
+
+    <update id="terminate" parameterType="com.ezen03.tieshoe.model.userBeans">
+            UPDATE user
+            SET penaltyDate = #{penaltyDate}, user_penalty = #{user_penalty}
+            WHERE ID = #{ID};
+    </update>
+
+    <select id="checkSocial"
+            parameterType="com.ezen03.tieshoe.model.userBeans" resultType="int">
+        SELECT COUNT(*) FROM user
+        WHERE userId=#{userId} AND userPw=md5(#{userPw})
+	</select>
+
+    <insert id="addSocialUser"
+            parameterType="com.ezen03.tieshoe.model.userBeans"
+            useGeneratedKeys="true" keyProperty="ID">
+            INSERT INTO user (userId, userPw, userPhonenum, userName, userEmail, userZipcode, userAddress1, userAddress2, userBirthDate, reg_date, emailCheck)
+            VALUES (#{userId}, md5(#{userPw}), #{userPhonenum}, #{userName}, #{userEmail}, '00000', 'social', 'social', #{userBirthDate}, NOW(), "Y");
+
+	</insert>
+
+</mapper>

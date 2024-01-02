@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mapper sample file 입니다. -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="resetMapper">
+    <!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+    <resultMap id="resetMap" type="com.ezen03.tieshoe.model.userReset">
+        <result property=" ID" column=" ID " />
+        <result property=" email_key" column=" email_key " />
+        <result property=" email_type" column=" email_type " />
+        <result property=" key_used" column=" key_used " />
+        <result property=" reg_date" column=" reg_date " />
+        <result property=" edit_date" column=" edit_date " />
+        <result property=" user_ID" column=" user_ID " />
+    </resultMap>
+
+
+    <insert id="insertKey"
+            parameterType="com.ezen03.tieshoe.model.userReset"
+            useGeneratedKeys="true" keyProperty="authEmailnum">
+        INSERT
+        INTO user_auth_email
+        (email_key, email_type, reg_date, user_ID)
+        VALUES (#{email_key}, 3, now(), #{user_ID});
+    </insert>
+    
+    <!-- 가입 인증 메일 key 생성-->
+    <insert id="authEmailKey"
+            parameterType="com.ezen03.tieshoe.model.userReset"
+            useGeneratedKeys="true" keyProperty="ID">
+        INSERT
+        INTO user_auth_email
+        (email_key, email_type, key_used, reg_date, user_ID)
+        VALUES (#{email_key}, 1, "N", now(), #{user_ID});
+    </insert>
+    
+    <!-- 가입인증 완료 -->
+    <update id="successEmailAuth"
+            parameterType="com.ezen03.tieshoe.model.userReset">
+        UPDATE user_auth_email
+        SET key_used = "Y"
+        WHERE user_ID=#{user_ID} ;
+    </update>
+
+    <update id="updateKey"
+            parameterType="com.ezen03.tieshoe.model.userReset">
+        UPDATE user_auth_email
+        SET
+        	email_key=#{email_key},
+        	reg_date = now()
+        WHERE user_ID=#{user_ID} AND email_type = 3;
+    </update>
+
+    <select id="check"
+            parameterType="com.ezen03.tieshoe.model.userReset"
+            resultMap="resetMap">
+        select user.userID, user_auth_email.email_key, user_auth_email.email_type
+        from user
+        inner join user_auth_email ON user.ID = user_auth_email.user_ID
+        where user.ID = #{user_ID};
+    </select>
+    
+      <!-- 메일 인증 여부 확인을 위한 기능 정의 -->
+     <select id="checkUserAuthEmail" parameterType="com.ezen03.tieshoe.model.userBeans" resultMap="resetMap">
+        select email_type, key_used
+		from user_auth_email as a
+		join user as u
+		on a.user_ID = u.ID
+		WHERE u.ID = #{ID}
+    </select>
+
+</mapper>

@@ -1,0 +1,17 @@
+.buy_bidDate {
+    margin: 20px 0 10px;
+}
+
+.smallSize {
+    font-size: 13px;
+    color: black;
+}
+
+.buy_submit {
+    width: 70%;
+    float: right;
+}
+.buy_submit_button{
+    background-color: black;
+    float: right;
+}

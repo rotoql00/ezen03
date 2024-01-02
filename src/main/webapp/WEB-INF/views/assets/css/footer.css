@@ -1,0 +1,191 @@
+/*
+작성자: 임석현
+내용: footer.html에 대한 css입니다
+추가내용: 미디어 속성으로 모바일에서도 볼수 있도록 작성이 되었습니다.
+ */
+
+/*footer를 하단에 고정합니다.*/
+footer {
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    min-height: 460px;
+    background-color: black;
+    clear: both;
+}
+
+/* 색깔을 바꾸기 위해 전부 색깔을 검은 색으로 교체하였습니다*/
+footer * {
+    color: white;
+}
+
+/* reset.css가 없으므로 reset을 해주었습니다.*/
+footer ul, li, ol {
+    list-style: none;
+    padding-left: 0px;
+}
+
+/*모든 제목에 title의 속성을 추가합니다.*/
+.title {
+    font-size: 20px;
+    padding-bottom: 12px;
+}
+
+/*로고와 같이 설명있는 부분에 속성을 추가합니다.*/
+.introduction {
+    display: inline-block;
+    float: left;
+    width: 35%;
+    padding-bottom: 50px;
+    margin: 3% 0 5% 5%;
+}
+
+/*로고에 대한 속성입니다.*/
+.logo_footer {
+    padding-bottom: 20px;
+    font-size: 28px;
+    line-height: 0.9;
+    letter-spacing: 10px;
+}
+
+
+.options {
+    padding-bottom: 20px;
+}
+
+.options li {
+    display: inline;
+    padding-right: 15px;
+}
+
+footer li {
+    line-height: 27px;
+}
+
+footer p {
+    line-height: 27px;
+}
+
+li.info_address {
+    line-height: 22px;
+    padding-top: 20px;
+}
+
+
+.first_footer {
+    float: left;
+    min-width: 400px;
+    width: 35%;
+    margin: 3% 0 5% 0;
+
+
+}
+
+.guide_menu {
+    display: inline-block;
+    float: left;
+    padding-bottom: 20px;
+    width: 50%;
+}
+
+.help {
+    display: inline-block;
+    float: left;
+    width: 50%;
+}
+
+.second_footer {
+    display: inline-block;
+    float: left;
+    margin: 3% 0 5% 0;
+    width: 20%;
+}
+
+.sns_footer span {
+    font-size: 40px;
+    display: inline-block;
+}
+
+#scroll-top {
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+}
+
+.uk-icon-button{
+    color: white;
+    background-color: #767676;
+}
+/*first,second_footer가 창 크기에 의해서 아래로 내려갈때에
+padding을 줄여줍니다*/
+
+@media (max-width: 1345px) {
+    .first_footer {
+        float: left;
+        padding-top: 30px;
+        width: 55%;
+    }
+
+    .introduction {
+        display: inline-block;
+        float: left;
+        width: 40%;
+        padding-bottom: 50px;
+        margin: 5% 0 5% 5%;
+    }
+
+    .guide_menu {
+        display: inline-block;
+        float: left;
+        width: 50%;
+    }
+
+    .help {
+        display: inline-block;
+        float: left;
+        width: 50%;
+    }
+
+    .second_footer {
+        display: inline-block;
+        float: left;
+        width: 20%;
+        margin-top: -100px;
+    }
+}
+
+@media (max-width: 900px) {
+    .first_footer {
+        clear: both;
+        margin-left: 30px;
+    }
+
+    .introduction {
+        clear: both;
+    }
+
+    .guide_menu {
+        clear: both;
+    }
+
+    .help {
+    }
+
+    .second_footer {
+        margin: 50px;
+    }
+}
+
+@media (max-width: 635px) {
+    .first_footer {
+        clear: both;
+        margin-left: 30px;
+    }
+
+
+    .second_footer {
+        margin: 50px;
+        width: 100%
+    }
+
+}

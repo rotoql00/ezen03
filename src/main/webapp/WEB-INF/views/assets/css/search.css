@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+
+#searchbar{
+        width: 80%;
+        margin: auto;
+        padding-top: 20PX;
+        text-align: center;
+}
+.searchContent {
+    border-top: black solid 2px;
+}
+.searchContent ul li{
+    list-style: none;
+}
+.searchContent ul li span{
+    display: inline-block;
+    font-weight: bold;
+}
+.searchContent ul li a{
+    color: black;
+    padding: 10px 0;
+    font-weight: bold;
+    display: inline-block;
+
+}
+.searchContent .bestlist .bestrank:nth-child(2n){
+    background-color: #eeeeee;
+}
+
+.searchtab {
+    padding: 12px 0;
+}
+
+.searchtab a{
+    display: block;
+    color: black;
+    font-weight: bold;
+    padding: 0px 10px;
+}
+
+#Searchbest{
+    display: inline-block;
+}
+
+#Searchhistory{
+    display: inline-block;
+}
+
+.Searchlist.active{
+    background-color: black;
+    color: white;
+    padding: 4px 4px;
+}
+

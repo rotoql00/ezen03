@@ -1,0 +1,220 @@
+/*
+FileName: index.css
+Description: index에 대한 CSS입니다.
+Author: 임석현
+ */
+.container {
+    width: 80%;
+    margin: auto;
+}
+
+.index_product_name {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 17px;
+    text-decoration: none;
+    color: black;
+    height: 40px;
+}
+
+.index_lowprice_name {
+    text-align: center;
+    font-size: 11px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.index_lowprice-value {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
+
+.uk-link-toggle:focus .uk-link, .uk-link-toggle:hover .uk-link, .uk-link:hover, ul li a:hover, div a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.index_title {
+    margin: 60px 0;
+    text-align: center;
+    font-size: 20px;
+    color: black;
+    letter-spacing: 5px;
+}
+
+.index_divider {
+    border: none;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid #c8c8c8;
+    box-shadow: 0 20px 20px -20px #333;
+    margin: 100px 0;
+}
+
+.index_title_pop {
+    margin-bottom: 80px;
+    text-align: center;
+    font-size: 20px;
+    color: black;
+    letter-spacing: 5px;
+}
+
+#index_gridList_another {
+    margin-bottom: 200px;
+}
+
+.index_title_pop .mdpickicon {
+    color: darkorange;
+    animation: rotation 4s infinite linear;
+}
+
+@keyframes rotation {
+    100% {
+        transform: rotatey(360deg);
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+.banner {
+    width: 100%;
+    height: auto;
+}
+
+.back {
+    transform: rotate(180deg);
+}
+
+.brandCard {
+    padding: 10px;
+}
+
+.card-body {
+    padding: 0 5px 25px 5px;
+}
+
+div .uk-label {
+    background: white;
+    color: black;
+    display: unset;
+}
+
+div .uk-tab {
+    position: unset;
+}
+
+div .uk-tab > .uk-active > a {
+    border-color: black;
+}
+
+
+div .uk-tab::before {
+    display: none;
+}
+
+div .badgeContainer {
+    text-align: right !important;
+    margin-right: 20px;
+    padding-top: 15px;
+}
+
+div .uk-badge {
+    box-sizing: border-box;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 5px;
+    border-radius: unset;
+    vertical-align: middle;
+    background: white;
+    color: black;
+    border: 1px solid black;
+}
+
+.resize {
+    margin: 20px 0 35px 0 !important;
+}
+
+.loginReq {
+    margin: 100px 0 140px !important;
+}
+
+.cardTitle {
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.recentCat {
+    position: fixed;
+    right: 0;
+    top: 35%;
+    width: 90px;
+    margin-right: 1.5%;
+    background-color: white;
+}
+
+.recentTitle {
+    font-size: 12px;
+    padding-top: 15px;
+    text-align: center;
+    padding-bottom: 15px;
+    color: black;
+}
+
+#recentImage img {
+    width: 63px;
+    height: 63px;
+    text-align: center;
+    margin-left: 15px;
+}
+
+.recent_container {
+    border: 1px solid black;
+    width: 210px;
+    background-color: white;
+    height: 65px;
+    float: right;
+}
+
+.recentContext {
+    float: left;
+    font-size: 10px;
+    color: black;
+    width: 100px;
+    padding: 10px;
+    margin-bottom: 5px;
+    z-index: 50;
+}
+
+.recentContext_img {
+    display: inline;
+    float: left;
+    width: 90px;
+    vertical-align: baseline;
+    margin-top: 1px;
+}
+
+.boldName {
+    font-weight: bold;
+    height: 32px;
+}
+
+.recentContextPosition {
+    bottom: 0;
+}
+
+.show {
+    display: block;
+}
+
+.customHR {
+    margin: 0 !important;
+    border-top: 1px solid black;
+}

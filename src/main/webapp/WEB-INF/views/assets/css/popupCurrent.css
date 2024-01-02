@@ -1,0 +1,343 @@
+/*
+FileName: popupCurrent.css
+Description: 현재 시세에 대한 CSS입니다.
+Author: 임석현
+ */
+
+/******************************판매가에 대한 팝업*********************************/
+/*판매가 팝업에 대한 설정입니다*/
+.Popup_Wrapper_current {
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: none;
+    overflow-y: scroll;
+    padding: 30px 0 50px;
+}
+
+/*팝업의 크기를 설정합니다.*/
+.Popup_current {
+    text-align: center;
+    max-width: 470px;
+    margin: auto;
+    background: white;
+    position: relative;
+    min-height: 850px;
+    box-shadow: 4px -4px 11px 9px #555555;
+}
+
+/*제목에 대한 CSS구문입니다.*/
+.current_statusPopupContent h1 {
+    text-align: left;
+    margin: 25px 50px 50px;
+    font-size: 27px;
+}
+
+/* 탭에 대한 설정 CSS입니다*/
+.tabbed {
+    width: 600px;
+    margin: 90px 0 0 65px;
+}
+
+/* radio에 대한 CSS설정입니다.*/
+.tabbed > input {
+    display: none;
+}
+
+/* radio 속성과 연결된 label에 대한 설정입니다.*/
+.tabbed > label {
+    display: block;
+    float: left;
+    padding: 17px 30px;
+    margin: 0 2px 20px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: 1px solid black;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+/*탭에 hover했을떄 나는 효과 입니다. 체크를 했을시에는 고정됩니다.*/
+.tabbed > label:hover, .tabbed > input:checked + label {
+    background: black;
+    color: white;
+}
+
+/* context 본문영역에대한 조정입니다.*/
+.product_tabs {
+    clear: both;
+    perspective: 300px;
+    text-align: center;
+}
+
+/* context 본문영역에대한 조정입니다.*/
+.product_tabs > div {
+    width: 340px;
+    position: absolute;
+    line-height: 1.4em;
+    opacity: 0;
+    transform: rotateX(-20deg);
+    transform-origin: top center;
+    transition: opacity 0.3s, transform 1s;
+    margin-left: 1px;
+    text-align: center;
+}
+
+/*클릭시 전환시켜주는 CSS 구문입니다.*/
+#tab-nav-1:checked ~ .product_tabs > div:nth-of-type(1), #tab-nav-2:checked
+~ .product_tabs > div:nth-of-type(2), #tab-nav-3:checked ~ .product_tabs > div:nth-of-type(3) {
+    transform: rotateX(0);
+    opacity: 1;
+    z-index: 1;
+}
+
+.product_tabs table tr {
+    text-align: center;
+}
+
+.product_tabs table tr th {
+    font-weight: bold;
+    font-size: 12px;
+    padding: 8px;
+}
+
+.product_tabs table tr td {
+    font-size: 13px;
+    padding: 14px;
+}
+
+.product_tabs table tr th, .product_tabs table tr td {
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid black;
+}
+
+.product_option {
+    clear: both;
+    float: left;
+}
+
+/***************************판매가에 대한 팝업 끝*************************************/
+
+/******************************** BUY popup*******************************************/
+.buy_contentBuy {
+    text-align: left;
+    margin: 25px 50px 50px;
+    font-size: 27px;
+    color: white;
+    z-index: 999;
+}
+
+.buyPopup {
+    text-align: center;
+    max-width: 800px;
+    margin: auto;
+    background: #4caf50;
+    position: relative;
+    min-height: 1400px;
+    box-shadow: 4px -4px 11px 9px #555555;
+    z-index: 999;
+}
+
+.popupline_white {
+    border-left: 4px solid white;
+    height: 45px;
+    margin-left: 50px;
+}
+
+.close_white {
+    position: absolute;
+    right: 25px;
+    top: 25px;
+    width: 50px;
+    height: 50px;
+}
+
+.close_white:before, .close_white:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 70px;
+    width: 1px;
+    background-color: white;
+}
+
+.close_white:before {
+    transform: rotate(45deg);
+}
+
+.close_white:after {
+    transform: rotate(-45deg);
+}
+
+.buy_table {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+}
+
+.buy_table tr {
+    color: white;
+    text-align: center;
+}
+
+.buy_table tr td, .buy_table tr th {
+    padding-top: 20px;
+    padding-bottom: 25px;
+    color: white;
+}
+
+.buy_table tbody tr:nth-of-type(even) {
+    background: #76b852;
+}
+
+.buy_table tbody tr:hover td {
+    background: #509e2f;
+}
+
+/******************************** BUY popup 끝*******************************************/
+/******************************** SELL popup*******************************************/
+.sell_contentSell {
+    text-align: left;
+    margin: 25px 50px 50px;
+    font-size: 27px;
+    color: white;
+}
+
+.sellPopup {
+    text-align: center;
+    max-width: 800px;
+    margin: auto;
+    background: #ff5a5f;
+    position: relative;
+    min-height: 1400px;
+    box-shadow: 4px -4px 11px 9px #555555;
+}
+
+.sell_table {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+}
+
+.sell_table tr {
+    color: white;
+    text-align: center;
+}
+
+.sell_table tr td, .sell_table tr th {
+    padding-top: 20px;
+    padding-bottom: 25px;
+    color: white;
+}
+
+.sell_table tbody tr:nth-of-type(even) {
+    background: #f7786b;
+}
+
+.sell_table tbody tr:hover td {
+    background: #e63946;
+}
+
+/******************************** SELL popup 끝*******************************************/
+/******************************** 이용안내 popup*******************************************/
+/* 팝업의 백그라운드 입니다.*/
+.Popup_Wrapper {
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: none;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    padding: 50px 0;
+
+}
+
+/*팝업의 크기를 설정합니다.*/
+.Popup {
+    z-index: 999;
+    text-align: center;
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    position: relative;
+    min-height: 500px;
+    box-shadow: 4px -4px 11px 9px #555555;
+}
+
+/*X 나가기 버튼입니다.*/
+.close {
+    position: absolute;
+    right: 25px;
+    top: 25px;
+    width: 50px;
+    height: 50px;
+    opacity: 0.3;
+}
+
+.close:hover {
+    opacity: 1;
+}
+
+.close:before, .close:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 70px;
+    width: 1px;
+    background-color: black;
+}
+
+.close:before {
+    transform: rotate(45deg);
+}
+
+.close:after {
+    transform: rotate(-45deg);
+}
+
+/*데코레이션 상단에 줄을 그어줍니다*/
+.popupline {
+    border-left: 4px solid black;
+    height: 45px;
+    margin-left: 50px;
+}
+
+/* 팝업 상단 제목에 대한 속성입니다*/
+.userGuidePopupContent h1 {
+    text-align: left;
+    margin: 25px 50px 50px;
+    font-size: 27px;
+}
+
+/*이용안내 png를 가져옵니다.*/
+.userGuidePopupContent img {
+    padding-bottom: 100px;
+}
+
+/********************************************************************************/
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.product_option {
+    margin-bottom: 5px;
+}
+
+.nice-select .list {
+    border-radius: 0px;
+    height: 180px;
+    overflow-y: auto;
+}
+
+.push {
+    margin: 30px 0;
+}

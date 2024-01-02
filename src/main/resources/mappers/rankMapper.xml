@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mapper sample file 입니다. -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rankMapper">
+    <resultMap id="rankMap" type="com.ezen03.tieshoe.model.rankBeans">
+        <!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+        <result property=" edit_date" column=" edit_date "/>
+        <result property=" ID " column=" ID "/>
+        <result property=" popularFifth " column=" popularFifth "/>
+        <result property=" popularFirst " column=" popularFirst "/>
+        <result property=" popularFourth " column=" popularFourth "/>
+        <result property=" popularSecond " column=" popularSecond "/>
+        <result property=" popularSeventh " column=" popularSeventh "/>
+        <result property=" popularSixth " column=" popularSixth "/>
+        <result property=" popularThird " column=" popularThird "/>
+        <result property=" reg_date " column=" reg_date "/>
+    </resultMap>
+
+    <select id="getRank"
+            parameterType="com.ezen03.tieshoe.model.rankBeans"
+            resultMap="rankMap">
+            select popularFifth, popularFirst, popularFourth, popularSecond, popularSeventh, popularSixth, popularThird from popularsearch
+            LIMIT 1;
+    </select>
+    
+     <!-- 검색어 등록을 위한 기능 정의-->
+    <insert id="setRank"
+            parameterType="com.ezen03.tieshoe.model.rankBeans"
+            useGeneratedKeys="true" keyProperty="ID">
+            INSERT INTO popularsearch(popularFirst, popularSecond, popularThird, popularFourth, popularFifth, popularSixth, popularSeventh, reg_date, edit_date)
+            VALUES(#{popularFirst}, #{popularSecond}, #{popularThird}, #{popularFourth}, #{popularFifth}, #{popularSixth}, #{popularSeventh}, now(), now())            
+    </insert>
+
+</mapper>

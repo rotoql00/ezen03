@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mapper sample file 입니다. -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sellMapper">
+    <resultMap id="sellMap" type="com.ezen03.tieshoe.model.sellBeans">
+        <!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+        <result property=" ID" column=" ID "/>
+        <result property=" sellPrice" column=" sellPrice "/>
+        <result property=" sellFee" column=" sellFee "/>
+        <result property=" sellEnd" column=" sellEnd "/>
+        <result property=" sellSize" column=" sellSize "/>
+        <result property=" reg_date" column=" reg_date "/>
+        <result property=" edit_date" column=" edit_date "/>
+        <result property=" user_ID" column=" user_ID "/>
+        <result property=" search" column=" search "/>
+        <result property=" category" column=" category"/>
+        <result property="orderNum" column="orderNum"/>
+
+        <result property="product_thumb" column="product_thumb"/>
+        <result property="productNameEN" column="productNameEN"/>
+        <result property="orderStatus" column="orderStatus"/>
+        <result property="productNum" column="productNum"/>
+        <result property="productCode" column="productCode"/>
+        <result property="sellAllLowest" column="sellAllLowest"/>
+        <result property="sellAllHighest" column="sellAllHighest"/>
+        <result property="sellLowest260" column="sellLowest260"/>
+        <result property="sellLowest265" column="sellLowest265"/>
+        <result property="sellLowest270" column="sellLowest270"/>
+        <result property="countProduct" column="countProduct"/>
+        <result property="rangeStart" column="rangeStart"/>
+        <result property="rangeEnd" column="rangeEnd"/>
+
+        <result property="offset" column="offset"/>
+        <result property="listCount" column="listCount"/>
+    </resultMap>
+
+    <select id="selectOne"
+            parameterType="com.ezen03.tieshoe.model.sellBeans"
+            resultMap="sellMap">
+            SELECT *
+            FROM sell
+            WHERE ID = #{ID}
+    </select>
+
+    <!-- 상품중 가장 높은 가격을 가져옵니다 (판매중 제외)-->
+    <select id="selectAllHighPrice"
+            parameterType="com.ezen03.tieshoe.model.sellBeans"
+            resultMap="sellMap">
+            SELECT MAX(sellPrice) AS sellALLHighest
+            FROM sell
+            WHERE productNum = #{productNum} AND sellProcess = "N"
+            ORDER BY sellPrice DESC
+            Limit 1;
+    </select>
+
+    <!-- 상품중 가장 낮은 가격을 가져옵니다 (판매중 제외)-->
+    <select id="selectAllLowPrice"
+            parameterType="com.ezen03.tieshoe.model.sellBeans"
+            resultMap="sellMap">
+            SELECT MIN(sellPrice) AS sellAllLowest
+            FROM sell
+            WHERE productNum = #{productNum} AND sellProcess = "N"
+            ORDER BY sellPrice
+            Limit 1;
+    </select>
+
+    <select id="selectLowest260"
+            parameterType="com.ezen03.tieshoe.model.sellBeans"
+            resultMap="sellMap">
+            SELECT sellPrice AS sellLowest260
+            FROM sell
+            WHERE productNum = #{productNum} AND sellSize = 260 AND sellProcess = "N"
+            ORDER BY sellPrice
+            Limit 1;
+    </select>
+
+    <select id="selectLowest265"
+            parameterType="com.ezen03.tieshoe.model.sellBeans"
+            resultMap="sellMap">
+            SELECT sellPrice AS sellLowest265
+            FROM sell
+            WHERE productNum = #{productNum} AND sellSize = 265 AND sellProcess = "N"
+            ORDER BY sellPrice
+            Limit 1;
+    </select>
+
+    <select id="selectLowest270"
+            parameterType="com.ezen03.tieshoe.model.sellBeans"
+            resultMap="sellMap">
+            SELECT sellPrice AS sellLowest270
+            FROM sell
+            WHERE productNum = #{productNum} AND sellSize = 270 AND sellProcess = "N"
+            ORDER BY sellPrice
+            Limit 1;
+    </select>
+
+    <select id="selectSellAllPrice"
+            parameterType="com.ezen03.tieshoe.model.sellBeans"
+            resultMap="sellMap">
+        SELECT sellSize, sellPrice, COUNT(sellPrice) AS countProduct
+        FROM sell
+        <choose>
+            <when test="sellSize == 100">
+                WHERE productNum = #{productNum} AND sellProcess = "N"
+            </when>
+            <otherwise>
+                WHERE productNum = #{productNum} AND sellSize = ${sellSize} AND sellProcess = "N"
+            </otherwise>
+        </choose>
+        Group By sellSize, sellPrice
+        ORDER BY sellSize
+
+        <if test="listCount > 0">
+            LIMIT #{offset}, #{listCount}
+        </if>
+    </select>
+
+    <select id="selectCountAll"
+            parameterType="com.ezen03.tieshoe.model.sellBeans"
+            resultType="int">
+        SELECT COUNT(*) FROM sell
+        LEFT JOIN ordernum ON sell.ID = ordernum.sell_ID
+        <choose>
+            <when test="sellSize == 100">
+                WHERE productNum = #{productNum} AND sellProcess = "N"
+            </when>
+            <otherwise>
+                WHERE productNum = #{productNum} AND sellSize = ${sellSize} AND sellProcess = "N"
+            </otherwise>
+        </choose>
+    </select>
+
+
+    <select id="checkSellProcessY" parameterType="com.ezen03.tieshoe.model.sellBeans" resultType="int">
+       update sell
+       set sellProcess = 'D'
+	   where sellProcess = 'Y' and user_ID =#{ID};
+    </select>
+    
+    <select id="checkSellProcessA" parameterType="com.ezen03.tieshoe.model.sellBeans" resultType="int">
+       update sell
+       set sellProcess = 'B'
+	   where sellProcess = 'A' and user_ID =#{ID};
+	</select>
+
+    <select id="getsellList"
+            parameterType="com.ezen03.tieshoe.model.sellBeans"
+            resultMap="sellMap">
+        SELECT s.user_ID, p.product_thumb, p.productNameEN, p.productCode, DATE_FORMAT( s.reg_date, "%Y/%m/%d") AS
+        reg_date, s.sellPrice, s.sellEnd, o.SellOrderStatus AS orderStatus, s.productNum, s.sellSize, s.ID, s.sellFee,
+        o.sell_ID, o.ID AS orderNum
+        FROM sell AS s
+        left JOIN product
+        AS p ON s.productNum = p.ID
+        left JOIN ordernum
+        AS o ON s.ID = o.sell_ID
+        WHERE s.user_ID = #{user_ID} AND o.sellOrderStatus IS NULL AND s.reg_date
+        BETWEEN #{rangeStart} AND #{rangeEnd}
+        ORDER BY o.reg_date DESC
+        <if test="listCount > 0">
+            LIMIT #{offset}, #{listCount};
+        </if>
+    </select>
+
+    <select id="getSellProcessList"
+            parameterType="com.ezen03.tieshoe.model.sellBeans"
+            resultMap="sellMap">
+        SELECT s.user_ID, p.product_thumb, p.productNameEN, p.productCode, s.sellPrice, s.sellEnd, o.ID AS orderNum,
+        o.SellOrderStatus AS orderStatus, s.productNum, s.sellSize, DATE_FORMAT( o.reg_date, "%Y/%m/%d") AS reg_date,
+        o.edit_date AS edit_date
+        FROM sell AS s
+        left JOIN product
+        AS p ON s.productNum = p.ID
+        left JOIN ordernum
+        AS o ON s.ID = o.sell_ID
+        WHERE s.user_ID = #{user_ID} AND o.sellOrderStatus IS NOT NULL AND s.reg_date
+        BETWEEN #{rangeStart} AND #{rangeEnd}
+        ORDER BY o.reg_date DESC
+        <if test="listCount > 0">
+            LIMIT #{offset}, #{listCount};
+        </if>
+    </select>
+
+    <select id="selectListCount"
+            parameterType="com.ezen03.tieshoe.model.sellBeans"
+            resultType="int">
+            SELECT COUNT(s.ID)
+            FROM sell AS s
+            left JOIN ordernum
+             AS o ON s.ID = o.buy_ID
+            WHERE s.user_ID = #{user_ID} AND o.buyOrderStatus IS NULL
+    </select>
+
+    <select id="selectProcessListCount"
+            parameterType="com.ezen03.tieshoe.model.sellBeans"
+            resultType="int">
+            SELECT COUNT(s.ID)
+            FROM sell AS s
+            left JOIN ordernum
+             AS o ON s.ID = o.buy_ID
+            WHERE s.user_ID = #{user_ID} AND o.buyOrderStatus IS NOT NULL
+    </select>
+
+    <select id="sellList"
+            parameterType="com.ezen03.tieshoe.model.sellBeans"
+            resultMap="sellMap">
+        SELECT s.ID, s.sellPrice, s.sellFee, s.reg_date, s.edit_date, s.sellEnd, s.sellSize, u.userId AS rangeEnd,
+        u.userName AS rangeStart,
+        p.productCode AS productCode, p.product_thumb AS product_thumb, o.ID AS orderReg_date, o.SellOrderStatus AS
+        orderStatus, o.SellOrderStatus AS sellLowest260, o.BuyOrderStatus AS sellLowest270, o.ID AS orderNum FROM sell s
+        INNER JOIN user u ON s.user_ID = u.ID
+        INNER JOIN product p ON s.productNum = p.ID
+        LEFT JOIN ordernum o ON s.ID = o.buy_ID
+        <!--
+            0 = 전체
+            1 = 아이디
+            2 = 이름
+         -->
+        <choose>
+            <when test="category == 1">
+                WHERE u.userId LIKE concat('%', #{search}, '%')
+            </when>
+
+            <when test="category == 2">
+                WHERE u.userName LIKE concat('%', #{search}, '%')
+            </when>
+
+            <otherwise>
+
+            </otherwise>
+        </choose>
+        ORDER BY o.SellOrderStatus != 7 AND s.reg_date DESC
+
+        <if test="listCount > 0">
+            LIMIT #{offset}, #{listCount}
+        </if>
+    </select>
+
+    <select id="sellListCount"
+            parameterType="com.ezen03.tieshoe.model.sellBeans"
+            resultType="int">
+        SELECT COUNT(*)FROM sell s
+        INNER JOIN user u ON s.user_ID = u.ID
+        LEFT JOIN ordernum o ON s.ID = o.buy_ID
+
+        <choose>
+            <when test="category == 1">
+                WHERE u.userId LIKE concat('%', #{search}, '%')
+            </when>
+
+            <when test="category == 2">
+                WHERE u.userName LIKE concat('%', #{search}, '%')
+            </when>
+
+            <otherwise>
+
+            </otherwise>
+        </choose>
+    </select>
+
+    <update id="updateSellStatus" parameterType="com.ezen03.tieshoe.model.sellBeans">
+       update sell
+       set sellProcess = 'Y'
+	   where ID = #{ID}
+    </update>
+
+    <update id="updateSellPrice" parameterType="com.ezen03.tieshoe.model.sellBeans">
+        UPDATE sell
+        SET sellPrice = #{sellPrice}, sellFee = #{sellFee}, edit_date = CURDATE() WHERE ID = #{ID};
+    </update>
+
+    <insert id="addSell"
+            parameterType="com.ezen03.tieshoe.model.sellBeans"
+            useGeneratedKeys="true" keyProperty="ID" keyColumn="ID">
+            INSERT INTO sell (sellPrice, sellFee, productNum, user_ID, reg_date, sellProcess, sellEnd, sellSize)
+            VALUES (#{sellPrice}, #{sellFee}, #{productNum}, #{user_ID}, CURDATE(), #{sellProcess}, #{sellEnd}, #{sellSize});
+    </insert>
+
+    <select id="check"
+            parameterType="com.ezen03.tieshoe.model.sellBeans"
+            resultMap="sellMap">
+            SELECT * FROM sell
+            WHERE productNum = #{productNum} AND user_ID = #{user_ID} AND sellSize = #{sellSize} AND sellProcess = "N"
+            Limit 1;
+    </select>
+
+    <delete id="deleteSell"
+            parameterType="com.ezen03.tieshoe.model.sellBeans">
+        DELETE FROM sell WHERE ID = #{ID} AND sellProcess = "N";
+    </delete>
+
+    <update id="terminate" parameterType="com.ezen03.tieshoe.model.sellBeans">
+            UPDATE sell
+            SET sellProcess = #{sellProcess}
+            WHERE ID = #{ID};
+    </update>
+    
+     <!-- 유저 판매 확인 -->
+     <select id="sellUserCount"
+            parameterType="com.ezen03.tieshoe.model.sellBeans"
+            resultType="int">
+            SELECT COUNT(*)
+            FROM sell 
+            WHERE user_ID = #{user_ID};
+    </select>
+</mapper>

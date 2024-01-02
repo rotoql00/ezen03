@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mapper sample file 입니다. -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="recentCheckMapper">
+    <resultMap id="recentCheckMap" type="com.ezen03.tieshoe.model.recentCheck">
+        <!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+        <result property=" ID" column=" ID "/>
+        <result property=" first" column=" first "/>
+        <result property=" second" column=" second "/>
+        <result property=" third" column=" third "/>
+        <result property=" user_ID" column=" user_ID "/>
+        <result property="thumbPath" column="thumbPath"/>
+        <result property="productName" column="productName"/>
+        <result property="price" column="price"/>
+        <result property="reg_date" column="reg_date"/>
+    </resultMap>
+
+    <!-- 상품 조회를 위한 기능 정의-->
+    <select id="getCheck"
+            parameterType="com.ezen03.tieshoe.model.recentCheck"
+            resultMap="recentCheckMap">
+            SELECT * FROM recentcheck WHERE user_ID = #{user_ID}
+    </select>
+
+    <update id="updateCheck"
+            parameterType="com.ezen03.tieshoe.model.recentCheck">
+            UPDATE recentcheck SET first = #{first}, second = #{second}, third = #{third}, reg_date = CURDATE()
+            WHERE user_ID = #{user_ID};
+    </update>
+
+    <insert id="insertCheck"
+            parameterType="com.ezen03.tieshoe.model.recentCheck"
+            useGeneratedKeys="true" keyProperty="ID">
+            INSERT INTO recentcheck (first, second, third, user_ID, reg_date)
+            VALUES (#{first}, #{second}, #{third}, #{user_ID}, CURDATE());
+    </insert>
+
+    <select id="getCheckIndex"
+            parameterType="com.ezen03.tieshoe.model.recentCheck"
+            resultMap="recentCheckMap">
+            SELECT * FROM recentcheck WHERE user_ID = #{user_ID}
+    </select>
+
+    <select id="first"
+            parameterType="com.ezen03.tieshoe.model.recentCheck"
+            resultMap="recentCheckMap">
+                select first, count(*) from recentcheck
+                group by first
+                limit 0,4;
+    </select>
+
+    <select id="second"
+            parameterType="com.ezen03.tieshoe.model.recentCheck"
+            resultMap="recentCheckMap">
+                select second, count(*) from recentcheck
+                group by second
+                limit 0,4;
+    </select>
+
+    <select id="third"
+            parameterType="com.ezen03.tieshoe.model.recentCheck"
+            resultMap="recentCheckMap">
+                select third, count(*) from recentcheck
+                group by third
+                limit 0,4;
+    </select>
+</mapper>

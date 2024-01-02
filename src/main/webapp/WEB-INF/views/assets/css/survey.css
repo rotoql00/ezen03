@@ -1,0 +1,83 @@
+/* 설문조사 전체 영역 */
+
+.container {
+    margin: 70px auto;
+}
+
+.sv_main {
+    border: none;
+    background-color: white;
+}
+
+.sv_main .sv_body {
+    border: none;
+}
+
+
+/*설문조사 버튼*/
+.sv_main input[type="button"], .sv_main button {
+    background-color: #2F4F4F;
+    padding: 5px 7px;
+    font-size: 14px;
+    font-weight: unset;
+}
+
+/*설문조사 버튼 호버*/
+.sv_main input[type="button"]:hover, .sv_main button:hover {
+    background-color: black;
+    padding: 5px 7px;
+    font-size: 14px;
+    font-weight: unset;
+}
+
+
+.sv_main .sv_progress {
+    background-color: #DCDCDC !important;
+}
+
+/*설문조사 프로세스 bar 바탕영역 색상*/
+.sv_main .sv_progress {
+    background-color: white;
+    margin-bottom: 2em;
+}
+
+.sv_main sv_default_css {
+    border: 1px !important;
+    box-shadow: 1px 1px 1px 1px !important;
+}
+
+/*설문조사 프로세스 bar 진행도 영역*/
+.sv_main .sv_container .sv_body .sv_progress .sv_progress_bar {
+    height: 100%;
+    min-width: 100px;
+    position: relative;
+    margin-top: 2em;
+}
+
+/*설문조사 프로세스 bar 진행도 영역 색상*/
+.sv_main .sv_progress_bar {
+    background-color: red;
+}
+
+/* 체크박스 라디오 박스  */
+.sv_main .sv_container .sv_body .sv_p_root fieldset.sv_qcbc {
+    width: 100%;
+    min-height: 230px;
+}
+
+.sv_qstn .sv-q-col-1, .sv-question .sv-q-col-1 {
+    width: 40% !important;
+    margin: 3px 70px 0px 20px !important;
+
+}
+
+.sv_header {
+    text-align: center;
+    letter-spacing: 5px;
+    font-size: 18px;
+    color: black;
+}
+
+.sv_main .sv_header {
+    background-color: white;
+}

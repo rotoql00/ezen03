@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mapper sample file 입니다. -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="couponMapper">
+    <resultMap id="couponMap" type="com.ezen03.tieshoe.model.couponBeans">
+        <!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+        <result property=" ID" column=" ID "/>
+        <result property=" couponType" column=" couponType "/>
+        <result property=" coupon_used" column=" coupon_used "/>
+        <result property=" user_ID" column=" user_ID "/>
+        <result property=" reg_date" column=" reg_date "/>
+        <result property=" edit_date" column=" edit_date "/>
+    </resultMap>
+
+    <select id="getShipping"
+            parameterType="com.ezen03.tieshoe.model.couponBeans"
+            resultMap="couponMap">
+            SELECT ID FROM coupon
+            WHERE coupon_used = "N" AND user_ID = #{user_ID} AND couponType = 1
+            LIMIT 0,1;
+</select>
+
+    <select id="getDec"
+            parameterType="com.ezen03.tieshoe.model.couponBeans"
+            resultMap="couponMap">
+            SELECT coupon.ID AS ID, user.userLevel AS user_ID FROM coupon
+            INNER JOIN user ON coupon.user_ID = user.ID
+            WHERE coupon_used = "N" AND user_ID = #{user_ID} AND couponType = 1
+            LIMIT 0,1;
+</select>
+
+    <update id="useCoupon"
+            parameterType="com.ezen03.tieshoe.model.couponBeans">
+            INSERT INTO coupon (coupon_used, edit_date)
+            VALUES ('Y', CURDATE());
+
+    </update>
+
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mapper sample file 입니다. -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="popularMapper">
+    <resultMap id="popularMap" type="com.ezen03.tieshoe.model.popularBeans">
+        <!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+        <result property=" ID" column=" ID "/>
+        <result property=" popular_product" column=" popular_product "/>
+        <result property=" reg_date" column=" reg_date "/>
+        <result property=" edit_date" column=" edit_date "/>
+    </resultMap>
+
+    <!-- 상품 조회를 위한 기능 정의-->
+    <select id="getList"
+            parameterType="com.ezen03.tieshoe.model.popularBeans"
+            resultMap="popularMap">
+            SELECT popular_product FROM popularproduct
+            ORDER BY ID DESC
+            LIMIT 1;
+    </select>
+    
+     <!-- 인기상품 등록을 위한 기능 정의-->
+    <insert id="setList"
+            parameterType="com.ezen03.tieshoe.model.popularBeans"
+            useGeneratedKeys="true" keyProperty="ID">
+            INSERT INTO popularproduct(popular_product, reg_date, edit_date)
+            VALUES(#{popular_product}, now(), now())            
+    </insert>
+</mapper>

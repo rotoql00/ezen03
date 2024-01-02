@@ -1,0 +1,258 @@
+/*
+FileName: header.css
+Description: Header에 대한 CSS입니다.
+Author: 임석현
+ */
+
+/* 로고를 수정하였습니다. */
+.logo {
+    color: black !important;
+    font-size: 28px;
+    line-height: 0.9;
+    letter-spacing: 10px;
+}
+
+#hello {
+    text-transform: unset !important;
+}
+
+
+.top_header_left li {
+    padding: 12px 7px 12px 0;
+    font-size: 12px;
+    margin-left: 15px;
+}
+
+.top_header_right li {
+    display: inline-block;
+    padding: 12px 7px;
+    font-size: 12px;
+}
+
+.ranking li {
+    padding: 10px 0;
+}
+
+.ranking:hover {
+    cursor: pointer;
+}
+
+.uk-link, a {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.uk-link-toggle:focus .uk-link, .uk-link-toggle:hover .uk-link, .uk-link:hover, ul li a:hover, div a:hover {
+    color: unset;
+    text-decoration: none;
+}
+
+.top_divider {
+    margin: 0 !important;
+}
+
+
+.searchBar_center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header_width {
+    margin: auto;
+    width: 80%;
+}
+
+.searchStyle {
+    border: unset;
+    border-bottom: 2px solid black;
+}
+
+.navbarContainer {
+    background-color: white !important;
+}
+
+.icon_color {
+    color: black;
+}
+
+.searchStyle:focus {
+    border-color: red;
+}
+
+.bottomHeader {
+    background: black;
+}
+
+.white {
+    color: white !important;
+}
+
+.white li {
+    display: inline-block;
+}
+
+.white li a {
+    color: white !important;
+    font-size: 14px !important;
+    margin-right: 5px;
+    letter-spacing: 1px;
+}
+
+.userInfo_session {
+    font-weight: bold;
+}
+
+.button_sellBuy {
+    font-size: 10px;
+    bottom: 0;
+    left: 0;
+}
+
+div .uk-dropdown {
+    border: 1px solid black;
+    min-width: 150px;
+    padding: 25px;
+}
+
+.controllers {
+    position: absolute;
+    margin: 26px 0 0 90%;
+
+}
+
+.buySellButtonSession {
+    border: 2px solid black;
+    padding: 5px 7px;
+    border-radius: 5px;
+}
+
+.headerBuySell {
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+}
+
+.headerBuySell:hover {
+    color: #767676;
+    cursor: pointer;
+}
+
+.headerBuySellDiv {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.searchRank {
+    z-index: 99;
+    position: absolute;
+    background-color: white;
+}
+
+.uk-slideshow-items {
+    color: white;
+}
+
+.uk-slideshow-items li {
+    z-index: 12;
+    color: white;
+    display: block;
+}
+
+.headerRank {
+    min-width: 90px;
+    max-width: 110px;
+}
+
+.rankDeg li {
+    font-size: 13px;
+}
+
+.rankNum {
+    color: red;
+}
+
+.rankhref:hover {
+    font-weight: bold;
+}
+
+.rankCardContainer {
+    position: absolute;
+    clear: both;
+    right: 0;
+    z-index: 200;
+    margin-right: 120px;
+    width: 250px;
+}
+
+.rankHeader {
+    background-color: black;
+    height: 38px;
+    color: white;
+    letter-spacing: 1px;
+    font-size: 14px;
+    border-bottom: 2px grey solid;
+    z-index: 999 !important;
+}
+
+.rankHeader p {
+    padding: 12px 20px;
+}
+
+.chart {
+    padding: 12px 20px;
+    font-size: 14px;
+}
+
+.headerClose {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 30px;
+    height: 30px;
+}
+
+.headerClose:hover {
+    opacity: 1;
+}
+
+.headerClose:before, .headerClose:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 20px;
+    width: 1px;
+    background-color: white;
+}
+
+.headerClose:before {
+    transform: rotate(45deg);
+}
+
+.headerClose:after {
+    transform: rotate(-45deg);
+}
+
+.onTop {
+    z-index: 9999;
+}
+
+.rankreg:hover {
+    text-decoration: underline;
+}
+
+.scrolling {
+    width: 120px;
+}
+
+.downArr svg {
+    vertical-align: unset !important;
+}
+
+.toTop {
+    background-color: unset !important;
+    color: black !important;
+    margin-right: -10px;
+    margin-bottom: -15px;
+}

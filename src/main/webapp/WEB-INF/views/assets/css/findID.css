@@ -1,0 +1,26 @@
+/**
+*filename: findID.css
+*description: findID.html에 대한 css입니다.
+*author: 임채린
+ */
+
+
+/* 버튼 그림자 설정*/
+.uk-container #find_id_login .uk-button {
+	
+    box-shadow: 0 2px 10px -3px #767676;
+}
+
+/* 버튼 hover했을때에 색깔 교체*/
+.uk-container  #find_id_login .uk-button:hover {
+
+    background-color: #767676;
+
+}
+
+/* 버튼 클릭했을떄 (focus) 색깔 수정*/
+.uk-container #find_id_login .uk-button:focus {
+
+    background-color: #767676;
+
+}

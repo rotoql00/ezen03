@@ -1,0 +1,46 @@
+.reg_box_container {
+    border: 5px solid black;
+    width: 60%;
+    height: 40%;
+    margin: 7% auto 2%;
+    padding: 5%;
+    text-align: center;
+}
+
+.customLogo {
+    font-size: 35px !important;
+    margin-bottom: 3%;
+}
+
+.userID {
+    font-weight: bold;
+}
+
+.reg_box_survey {
+    border: 2px solid black;
+    width: 35%;
+    height: 5%;
+    margin: 5% auto 0;
+    padding: 2%;
+    text-align: center;
+}
+
+.reg_box_survey:hover {
+    border: 2px solid red;
+    transition: ease-in 0.2s;
+}
+
+.topContainer {
+    font-weight: bold;
+    color: black;
+    font-size: 17px;
+}
+
+.bottom_container {
+    color: black;
+    font-size: 15px;
+}
+
+.bottom_tab {
+    margin-bottom: 100px !important;
+}

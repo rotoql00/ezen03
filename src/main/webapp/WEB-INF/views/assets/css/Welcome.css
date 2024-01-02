@@ -1,0 +1,26 @@
+/*
+FileName: Welcome.css
+Description: 회원가입 완료 환영 페이지 css입니다..
+Author: 최성준
+*/
+
+.container {
+	min-height: 800px;
+	text-align: center;
+}
+
+.welcomePageHeader {
+	margin: 30px;
+}
+
+.surveyLink {
+	margin: 30px;
+}
+
+.linkArea {
+	margin: 30px;
+}
+
+.welcomeTextBox {
+	margin: 30px;
+}

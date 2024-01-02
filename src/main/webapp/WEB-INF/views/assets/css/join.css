@@ -1,0 +1,71 @@
+/*
+FileName: join.css
+Description: join에 대한 CSS입니다.
+Author: 최성준
+*/
+
+@charset "utf-8";
+
+div.joinLinkArea > .uk-tab > .uk-active > a {
+	border-bottom: 2px solid black;
+	font-size: 20px;
+    padding: 20px;
+}
+
+div.joinLinkArea > .uk-tab::before{
+	border-bottom: none;
+}
+
+.joinLinkArea{
+	margin : 30px;
+	text-align : center;
+}
+
+a.joinLink {
+	margin:auto;
+	
+}
+
+/* 회원가입 전체 폼 조절, 위치 */
+fieldset.uk-fieldset {
+    width: 400px;
+    margin: auto;
+    min-height: 900px;
+}
+
+/* 회원가입 항목별 크기 */
+div.uk-margin {
+    width: 100%;
+}
+
+/* 아이디, 우편번호 input 태그 크기 */
+div.uk-inline.ID,
+div.uk-inline.zip_code,
+div.uk-inline.email,
+div.uk-inline.Phonenum{
+    width: 70%;
+}
+
+/* 회원가입 버튼 */
+input.signUp {
+    box-shadow: 0 2px 10px -3px #767676;
+    width: 100%;
+}
+
+/* 우편번호. 도로명 주소 커서 속성 */
+input.zip_code,
+input.addr_1 {
+    cursor: not-allowed;
+    background: #f0f0f0;
+}
+
+
+label.uk-alert-danger {
+    display: none;
+}
+
+button.signUp {
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom : 30px;
+}

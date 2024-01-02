@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mapper sample file 입니다. -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="productMapper">
+    <resultMap id="productMap" type="com.ezen03.tieshoe.model.productBeans">
+        <!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+        <result property=" edit_date" column=" edit_date "/>
+        <result property=" ID" column=" ID "/>
+        <result property=" product_thumb" column=" product_thumb "/>
+        <result property=" productBrandEN" column=" productBrandEN "/>
+        <result property=" productBrandKR" column=" productBrandKR "/>
+        <result property=" productCode" column=" productCode "/>
+        <result property=" productColor" column=" productColor "/>
+        <result property=" productImgPath" column=" productImgPath "/>
+        <result property=" productNameEN" column=" productNameEN "/>
+        <result property=" productNameKR" column=" productNameKR "/>
+        <result property=" productReleaseDate" column=" productReleaseDate "/>
+        <result property=" productReleasePrice" column=" productReleasePrice "/>
+        <result property=" productUnit" column=" productUnit "/>
+        <result property=" reg_date" column=" reg_date "/>
+        <result property=" index_thumb" column=" index_thumb "/>
+        <result property=" List" column=" List "/>
+        <result property="search" column="search"/>
+        <result property="count" column="count"/>
+        <result property="productDrop" column="productDrop"/>
+
+        <result property="offset" column="offset"/>
+        <result property="listCount" column="listCount"/>
+    </resultMap>
+
+
+    <select id="countAllProduct"
+            parameterType="com.ezen03.tieshoe.model.productBeans"
+            resultType="int">
+            SELECT COUNT(*) FROM product;
+    </select>
+
+    <!-- 상품 조회를 위한 기능 정의-->
+    <select id="selectProduct"
+            parameterType="com.ezen03.tieshoe.model.productBeans"
+            resultMap="productMap">
+        SELECT * FROM product
+        WHERE ID = #{ID} AND productDrop = "N";
+    </select>
+
+    <!-- 아디다스 상품 상위 4개를 가져옵니다-->
+    <select id="getAdidas"
+            parameterType="com.ezen03.tieshoe.model.productBeans"
+            resultMap="productMap">
+        SELECT p.ID, p.index_thumb, p.productNameEN, MIN(s.sellPrice) AS productReleasePrice, COUNT(s.ID) AS productCode, p.reg_date from product AS p
+        LEFT JOIN sell AS s ON p.ID = s.productNum
+        WHERE p.productBrandEN = "adidas" AND productDrop = "N" AND (s.sellProcess = "N" OR s.sellProcess IS NULL)
+        GROUP BY p.ID
+        ORDER BY p.reg_date
+        LIMIT 4;
+    </select>
+
+    <!-- 아디다스 상품 상위 4개를 가져옵니다-->
+    <select id="getNike"
+            parameterType="com.ezen03.tieshoe.model.productBeans"
+            resultMap="productMap">
+        SELECT p.ID, p.index_thumb, p.productNameEN, MIN(s.sellPrice) AS productReleasePrice, COUNT(s.ID) AS productCode, p.reg_date from product AS p
+        LEFT JOIN sell AS s ON p.ID = s.productNum
+        WHERE p.productBrandEN = "nike" AND productDrop = "N" AND (s.sellProcess = "N" OR s.sellProcess IS NULL)
+        GROUP BY p.ID
+        ORDER BY p.reg_date
+        LIMIT 4;
+    </select>
+
+    <!-- 아디다스 상품 상위 4개를 가져옵니다-->
+    <select id="getConverse"
+            parameterType="com.ezen03.tieshoe.model.productBeans"
+            resultMap="productMap">
+        SELECT p.ID, p.index_thumb, p.productNameEN, MIN(s.sellPrice) AS productReleasePrice, COUNT(s.ID) AS productCode, p.reg_date from product AS p
+        LEFT JOIN sell AS s ON p.ID = s.productNum
+        WHERE p.productBrandEN = "converse" AND productDrop = "N" AND (s.sellProcess = "N" OR s.sellProcess IS NULL)
+        GROUP BY p.ID
+        ORDER BY p.reg_date
+        LIMIT 4;
+    </select>
+
+    <!-- 아디다스 상품 상위 4개를 가져옵니다-->
+    <select id="getJordan"
+            parameterType="com.ezen03.tieshoe.model.productBeans"
+            resultMap="productMap">
+        SELECT p.ID, p.index_thumb, p.productNameEN, MIN(s.sellPrice) AS productReleasePrice, COUNT(s.ID) AS productCode, p.reg_date from product AS p
+        LEFT JOIN sell AS s ON p.ID = s.productNum
+        WHERE p.productBrandEN = "jordan" AND productDrop = "N" AND (s.sellProcess = "N" OR s.sellProcess IS NULL)
+        GROUP BY p.ID
+        ORDER BY p.reg_date
+        LIMIT 4;
+    </select>
+
+    <select id="newArrival"
+            parameterType="com.ezen03.tieshoe.model.productBeans"
+            resultMap="productMap">
+        SELECT p.ID, p.index_thumb, p.productNameEN, MIN(s.sellPrice) AS productReleasePrice, COUNT(s.ID) AS productCode, p.reg_date from product AS p
+        LEFT JOIN sell AS s ON p.ID = s.productNum
+        WHERE productDrop = "N" AND (s.sellProcess = "N" OR s.sellProcess IS NULL)
+        GROUP BY p.ID
+        ORDER BY productReleaseDate DESC
+        LIMIT 16;
+    </select>
+
+    <select id="bestProduct"
+            parameterType="com.ezen03.tieshoe.model.productBeans"
+            resultMap="productMap">
+        SELECT p.ID, p.index_thumb, p.productNameEN, MIN(s.sellPrice) AS productReleasePrice, COUNT(s.ID) AS productCode, p.reg_date from product AS p
+        LEFT JOIN sell AS s ON p.ID = s.productNum
+        WHERE productDrop = "N" AND (s.sellProcess = "N" OR s.sellProcess IS NULL)
+        GROUP BY p.ID
+		HAVING COUNT(s.ID) > 4
+        ORDER BY productReleaseDate DESC
+        LIMIT 12;
+    </select>
+
+    <select id="getRecentProduct"
+            parameterType="com.ezen03.tieshoe.model.productBeans"
+            resultMap="productMap">
+        SELECT p.ID, p.product_thumb, p.productNameEN, MIN(s.sellPrice) AS productReleasePrice from product AS p
+        LEFT JOIN sell AS s ON p.ID = s.productNum
+        WHERE productDrop = "N" AND p.ID = #{ID} AND (s.sellProcess = "N" OR s.sellProcess IS NULL)
+        GROUP BY p.ID
+    </select>
+
+    <select id="getPopular"
+            parameterType="com.ezen03.tieshoe.model.productBeans"
+            resultMap="productMap">
+        SELECT p.ID, p.index_thumb, p.productNameEN, MIN(s.sellPrice) AS productReleasePrice, COUNT(s.ID) AS
+        productCode, p.reg_date from product AS p
+        LEFT JOIN sell AS s ON p.ID = s.productNum
+        WHERE productDrop = "N" AND (s.sellProcess = "N" OR s.sellProcess IS NULL) AND p.ID IN
+        <foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        GROUP BY p.ID
+        ORDER BY productReleaseDate
+        LIMIT 12;
+    </select>
+
+    <select id="selectList"
+            parameterType="com.ezen03.tieshoe.model.productBeans"
+            resultMap="productMap">
+      SELECT productNameEN, ID
+      FROM product
+ 	  WHERE productDrop = "N" AND (productCode LIKE concat('%', #{search}, '%') OR productNameEN LIKE concat('%', #{search}, '%') OR productNameKR LIKE concat('%', #{search}, '%'))
+ 	  LIMIT 16;
+   </select>
+
+    <select id="selectCountAll"
+            parameterType="com.ezen03.tieshoe.model.productBeans" resultType="int">
+        SELECT COUNT(*)
+        FROM product p
+    </select>
+
+    <select id="search"
+            parameterType="com.ezen03.tieshoe.model.productBeans"
+            resultMap="productMap">
+        SELECT p.ID, p.index_thumb, p.productNameEN, MIN(s.sellPrice) AS productReleasePrice, p.reg_date from product AS
+        p
+        LEFT JOIN sell AS s ON p.ID = s.productNum
+        WHERE productDrop = "N" AND (productNameEN LIKE concat('%', #{search}, '%') OR productNameKR LIKE concat('%',
+        #{search}, '%') OR productBrandEN LIKE concat('%', #{search}, '%') OR productBrandKR LIKE concat('%', #{search},
+        '%'))
+        GROUP BY p.ID
+
+        <if test="listCount > 0">
+            LIMIT #{offset}, #{listCount}
+        </if>
+    </select>
+
+    <select id="searchCount"
+            parameterType="com.ezen03.tieshoe.model.productBeans"
+            resultType="int">
+            SELECT COUNT(ID) AS count from product
+	        WHERE productDrop = "N" AND (productNameEN LIKE concat('%', #{search}, '%') OR productNameKR LIKE concat('%', #{search}, '%') OR productBrandEN LIKE concat('%', #{search}, '%') OR productBrandKR LIKE concat('%', #{search}, '%'));
+    </select>
+
+    <select id="getMdPick"
+            parameterType="com.ezen03.tieshoe.model.productBeans"
+            resultMap="productMap">
+        SELECT p.ID, p.index_thumb, p.productNameEN, MIN(s.sellPrice) AS productReleasePrice, p.reg_date from product AS
+        p
+        LEFT JOIN sell AS s ON p.ID = s.productNum
+        WHERE productDrop = "N" AND (s.sellProcess = "N" OR s.sellProcess IS NULL) AND (productNameEN Like concat('%',
+        'sample', '%')
+        <foreach collection="list" item="item" index="index">
+            OR productNameEN LIKE concat('%', #{item} , '%')
+        </foreach>
+        )
+        GROUP BY p.ID
+        LIMIT 16;
+    </select>
+
+    <select id="detailSearchCount" parameterType="Map" resultType="int">
+        SELECT COUNT(DISTINCT(p.ID)) AS count from product AS p
+        LEFT JOIN sell AS s ON p.ID = s.productNum
+        WHERE (s.sellProcess = "N" OR s.sellProcess IS NULL) AND p.productBrandEN IN
+        <foreach collection="brand" index="index" item="brandList" separator="," open="(" close=")">
+            #{brandList}
+        </foreach>
+        AND substr(p.productReleaseDate, 1, 4) IN
+        <foreach collection="year" index="index" item="yearList" separator="," open="(" close=")">
+            #{yearList}
+        </foreach>
+        <if test='size.equals("[0]")'>
+            AND s.sellSize IN
+            <foreach collection="size" index="index" item="sizeList" separator="," open="(" close=")">
+                #{sizeList}
+            </foreach>
+        </if>
+        <foreach collection="price" index="index" item="priceList">
+            <if test="priceList == 0">
+                AND p.productReleasePrice BETWEEN 0 AND 9999999999
+            </if>
+            <if test="priceList == 100000">
+                AND s.sellPrice BETWEEN 0 AND 100000
+            </if>
+            <if test="priceList == 200000">
+                AND s.sellPrice BETWEEN 100000 AND 200000
+            </if>
+            <if test="priceList == 300000">
+                AND s.sellPrice BETWEEN 200000 AND 300000
+            </if>
+            <if test="priceList == 400000">
+                AND s.sellPrice BETWEEN 300000 AND 400000
+            </if>
+            <if test="priceList == 500000">
+                AND s.sellPrice BETWEEN 400000 AND 500000
+            </if>
+            <if test="priceList == 999999">
+                AND s.sellPrice NOT BETWEEN 0 AND 500000
+            </if>
+        </foreach>
+        <if test='minPrice != "" and maxPrice != ""'>
+            OR s.sellPrice BETWEEN #{minPrice} AND #{maxPrice}
+        </if>
+        AND p.productDrop = 'N';
+    </select>
+
+    <select id="detailSearch" parameterType="Map" resultMap="productMap">
+        SELECT p.ID, p.index_thumb, p.productNameEN, MIN(s.sellPrice) AS productReleasePrice, p.reg_date from product AS
+        p
+        LEFT JOIN sell AS s ON p.ID = s.productNum
+        WHERE (s.sellProcess = "N" OR s.sellProcess IS NULL) AND p.productBrandEN IN
+        <foreach collection="brand" index="index" item="brandList" separator="," open="(" close=")">
+            #{brandList}
+        </foreach>
+        AND substr(p.productReleaseDate, 1, 4) IN
+        <foreach collection="year" index="index" item="yearList" separator="," open="(" close=")">
+            #{yearList}
+        </foreach>
+        <if test='size.equals("[0]")'>
+            AND s.sellSize IN
+            <foreach collection="size" index="index" item="sizeList" separator="," open="(" close=")">
+                #{sizeList}
+            </foreach>
+        </if>
+        <foreach collection="price" index="index" item="priceList">
+            <if test="priceList == 0">
+                AND p.productReleasePrice BETWEEN 0 AND 9999999999
+            </if>
+            <if test="priceList == 100000">
+                AND s.sellPrice BETWEEN 0 AND 100000
+            </if>
+            <if test="priceList == 200000">
+                AND s.sellPrice BETWEEN 100000 AND 200000
+            </if>
+            <if test="priceList == 300000">
+                AND s.sellPrice BETWEEN 200000 AND 300000
+            </if>
+            <if test="priceList == 400000">
+                AND s.sellPrice BETWEEN 300000 AND 400000
+            </if>
+            <if test="priceList == 500000">
+                AND s.sellPrice BETWEEN 400000 AND 500000
+            </if>
+            <if test="priceList == 999999">
+                AND s.sellPrice NOT BETWEEN 0 AND 500000
+            </if>
+        </foreach>
+        <if test='minPrice != "" and maxPrice != ""'>
+            OR s.sellPrice BETWEEN #{minPrice} AND #{maxPrice}
+        </if>
+        AND p.productDrop = 'N'
+        GROUP BY p.ID;
+    </select>
+
+    <select id="getBuyProductInfo"
+            parameterType="com.ezen03.tieshoe.model.productBeans"
+            resultMap="productMap">
+            SELECT ID, productNameEN, productNameKR, productImgPath FROM product
+            WHERE ID = #{ID};
+    </select>
+
+    <select id="productList"
+            parameterType="com.ezen03.tieshoe.model.productBeans"
+            resultMap="productMap">
+        SELECT ID, productCode, productNameEN, productNameKR, productColor, productReleaseDate, productReleasePrice,
+        productBrandKR, productBrandEN, productUnit, reg_date, product_thumb, productDrop FROM product
+        <!--
+    0 = 전체
+    1 = 상품코드
+    2 = 상품명
+    3 = 브랜드
+        -->
+        <choose>
+            <when test="category == 1">
+                WHERE productCode LIKE concat('%', #{search}, '%')
+            </when>
+
+            <when test="category == 2">
+                WHERE productNameEN LIKE concat('%', #{search}, '%') OR productNameKR LIKE concat('%', #{search}, '%')
+            </when>
+
+            <when test="category == 3">
+                WHERE productBrandEN LIKE concat('%', #{search}, '%') OR productBrandKR LIKE concat('%', #{search}, '%')
+            </when>
+
+            <otherwise>
+
+            </otherwise>
+        </choose>
+        ORDER BY reg_date AND productDrop = "N"
+
+        <if test="listCount > 0">
+            LIMIT #{offset}, #{listCount}
+        </if>
+    </select>
+
+    <select id="productListCount"
+            parameterType="com.ezen03.tieshoe.model.productBeans"
+            resultType="int">
+        SELECT COUNT(*) FROM product
+        <!--
+    0 = 전체
+    1 = 상품코드
+    2 = 상품명
+    3 = 브랜드
+        -->
+        <choose>
+            <when test="category == 1">
+                WHERE productCode LIKE concat('%', #{search}, '%')
+            </when>
+
+            <when test="category == 2">
+                WHERE productNameEN LIKE concat('%', #{search}, '%') OR productNameKR LIKE concat('%', #{search}, '%')
+            </when>
+
+            <when test="category == 3">
+                WHERE productBrandEN LIKE concat('%', #{search}, '%') OR productBrandKR LIKE concat('%', #{search}, '%')
+            </when>
+
+            <otherwise>
+
+            </otherwise>
+        </choose>
+        ORDER BY reg_date
+    </select>
+
+    <select id="dropProduct"
+            parameterType="com.ezen03.tieshoe.model.productBeans"
+            resultType="int">
+        UPDATE product SET productDrop = #{productDrop} WHERE ID = #{ID};
+    </select>
+
+    <!-- 상품을 추가하기 위한 구문-->
+    <insert id="addProduct"
+            parameterType="com.ezen03.tieshoe.model.productBeans"
+            useGeneratedKeys="true" keyProperty="ID">
+            INSERT INTO product (productCode, productNameEN, productNameKR, productColor, productReleaseDate, productReleasePrice, productBrandKR, productBrandEN, productImgPath, productUnit, reg_date, product_thumb, index_thumb)
+            VALUES (#{productCode}, #{productNameEN}, #{productNameKR}, #{productColor}, #{productReleaseDate}, #{productReleasePrice}, #{productBrandKR}, #{productBrandEN}, #{productImgPath}, #{productUnit}, CURDATE(), #{product_thumb}, #{index_thumb});
+    </insert>
+</mapper>

@@ -1,0 +1,265 @@
+/*
+FileName:myPage-sell.css
+Description: myPage_sell에 대한 CSS입니다.
+Author: 임석현
+*/
+
+/*전체 크기를 설정합니다.*/
+.container {
+    width: 80%;
+    margin: auto;
+    padding-top: 50px;
+    padding-bottom: 100px;
+}
+
+/* 최 상단의 타이틀을 가운데 정렬하고 글씨를 굵게 합니다.*/
+.myPage_title {
+    text-align: center;
+    font-weight: bolder;
+}
+
+/* 상단 서브 메뉴 가운데 정렬을 위한 width*/
+.container .myPage_subnav {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 상단 서브 메뉴를 가운데 정렬*/
+.container .mypage_center {
+    width: 268px;
+    margin: 60px auto;
+}
+
+/*상위 타이틀*/
+.myPage_info_title {
+    margin: 50px 0 10px;
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+    clear: both;
+}
+
+/* 상단 카드 전체*/
+.card_container {
+    margin: 15px 0;
+    height: 350px;
+    width: 100%;
+}
+
+/*상단 검은 색의 container*/
+.myPage_username_background {
+    top: 0;
+    left: 0;
+    height: 13%;
+    background-color: #222;
+
+}
+
+/*상위 검은색 바 안의 유저 네임*/
+.myPage_username_text {
+    font-size: 13px;
+    color: white;
+    margin-left: 3%;
+    padding: 13px;
+}
+
+/*사용자 이름*/
+#userName {
+    color: white;
+    font-size: 13px;
+}
+
+/*가젯 아이콘 색깔 */
+div .myPage_username_background .icon_nut {
+    color: #eb897c;
+}
+
+/*카드 내용 컨테이너*/
+.card_context_container {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px;
+}
+
+/*MY 판매를 왼쪽으로 정렬*/
+.myPage_card_title {
+    float: left;
+    font-size: 20px;
+    font-weight: bold;
+    width: 30%;
+}
+
+/*판매만 글씨크기 다르게*/
+.myPage_card_title_sell {
+    font-size: 30px;
+}
+
+/*카드 중간 크기 조정*/
+.card_middle {
+    float: left;
+    width: 30%;
+}
+
+/*판매자 등급 판매자 수수료에 대한 CSS*/
+.user_title {
+    float: left;
+    width: 70%;
+    font-size: 14px;
+}
+
+/*판매자 등급과 판매자 수수료*/
+.user_title_info {
+    padding: 8% 0 25% 0;
+}
+
+/*판매자 등급과 판매자 수수료에 결과*/
+.user_level_info {
+    padding-top: 15%;
+    padding-bottom: 35%;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+/*판매자 등급과 판매자 수수료에 결과*/
+.user_fee_info {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+/*판매자 등급과 판매자 수수료에 결과*/
+.user_title_result {
+    float: left;
+    width: 30%;
+}
+
+
+.user_button {
+    clear: both;
+    padding-top: 50px;
+}
+
+.myPage_level_button {
+    border: none;
+    border-radius: 5px;
+    background-color: coral;
+    width: 47%;
+    float: left;
+    height: 30px;
+    color: white;
+}
+
+.myPage_pen_button {
+    border: none;
+    border-radius: 5px;
+    width: 47%;
+    background-color: coral;
+    float: right;
+    height: 30px;
+    color: white;
+}
+
+.myPage_level {
+    float: left;
+    width: 40%;
+}
+
+.level_circle_container {
+    margin-top: 5%;
+    margin-left: 10%;
+}
+
+.level_circle {
+    width: 35px;
+    line-height: 35px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 17px;
+    font-weight: bold;
+    background-color: #c8c8c8;
+    display: inline-block;
+    color: white;
+    margin-right: 5px;
+}
+
+.level_circle_active {
+    width: 35px;
+    line-height: 35px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 17px;
+    font-weight: bold;
+    background-color: red;
+    display: inline-block;
+    color: white;
+    margin-right: 5px;
+}
+
+
+.myPage_level_desc {
+    margin-top: 50px;
+    font-size: 12px;
+    margin-left: 9%;
+}
+
+/*패널티 팝업*/
+.myPage_penalty_info {
+    font-size: 15px;
+    text-align: center;
+}
+
+/* 페널티 팝업의 글씨 조정 */
+.myPage_penalty_bold {
+    font-weight: bolder;
+    margin-top: 25px;
+}
+
+/*패널티 팝업에 타이틀*/
+.myPage_penalty_title {
+    margin: 20px 0 0 20px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/*패널티 팝업의 설명문*/
+.myPage_penalty_explain {
+    margin-left: 30px;
+    font-size: 14px;
+    color: #767676;
+    margin-top: 5px;
+}
+
+/*패널티 팝업에 있는 아이콘*/
+.myPage_penalty_bold .popup_icon {
+    color: red;
+}
+
+.search {
+    margin-top: 30px;
+}
+
+.yearInput {
+    margin-left: 30px;
+}
+
+.shoeImg {
+    max-width: unset;
+}
+
+.hidden {
+    display: none;
+}
+
+.tab {
+    margin-top: 50px;
+}
+
+.gap {
+    margin: 5px;
+}
+
+.uk-button {
+    padding: 0 25px!important;
+    line-height: 34px!important;
+}

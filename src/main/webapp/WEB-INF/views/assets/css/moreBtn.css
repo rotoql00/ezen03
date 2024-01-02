@@ -1,0 +1,21 @@
+/*
+FileName: moreBtn.css
+Description: 상품 상세보기 detailSearch.jsp의 더보기 버튼을 위한 CSS 입니다.
+Author: 최성준
+ */
+ 
+         .detailSearch_moreBtn {
+            width: 90%;
+            height: 52px;
+            margin: 30px 0px 100px 0px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            color: #000;
+            font-size: 13px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .detailSearch_moreBtn_area {
+            text-align: center;
+        }

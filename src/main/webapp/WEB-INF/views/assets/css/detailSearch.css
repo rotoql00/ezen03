@@ -1,0 +1,223 @@
+/**
+*filename: detailSearch.css
+*description: detailSearch.html에 대한 css입니다. 전체상품디스플레이 페이지와 병합시 body width 조정이 필요합니다.
+*author: 임채린
+ */
+
+/* 상세검색 버튼 설정 */
+div ul.uk-nav-sub {
+    padding: 5px 0;
+}
+
+ul.ks-cboxtags {
+    list-style: none;
+    padding: 20px;
+}
+
+ul.ks-cboxtags li {
+    display: inline;
+}
+
+ul.ks-cboxtags li label {
+    display: inline-block;
+    background-color: black;
+    border: 1px solid #767676;
+    color: white;
+    border-radius: 5px;
+    white-space: nowrap;
+    margin: 2px 0px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: all .2s;
+}
+
+ul.ks-cboxtags li label {
+    padding: 7px 11px;
+    cursor: pointer;
+}
+
+ul.ks-cboxtags li input[type="checkbox"]:checked + label {
+    background-color: #767676;
+    transition: all .2s;
+}
+
+ul.ks-cboxtags li input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+}
+
+ul.ks-cboxtags li input[type="radio"]:checked + label {
+    background-color: #767676;
+    transition: all .2s;
+}
+
+ul.ks-cboxtags li input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+}
+
+.option_container {
+    border: 1px solid black;
+    padding: 40px 50px;
+    width: 70%;
+    margin: auto;
+}
+
+.eachOptionBrand {
+    float: left;
+    width: 20%;
+    margin: auto;
+}
+
+.eachOption {
+    float: left;
+    width: 40%;
+    margin: auto;
+}
+
+.optionTitle {
+    font-size: 22px;
+    font-weight: bold;
+    color: black;
+    padding-bottom: 20px;
+}
+
+.inputTitle {
+    font-size: 15px;
+    padding-top: 20px;
+    paading-bottom: 10px;
+
+}
+
+ul.optionBrand li label {
+    background-color: white !important;
+    border: none;
+    color: black;
+    margin: 0;
+    padding: 7px 0;
+    border-radius: unset;
+}
+
+ul.optionBrand li input[type="checkbox"]:checked + label {
+    color: red;
+    transition: all .2s;
+    font-weight: bold;
+}
+
+ul.optionAll li label {
+    background-color: white !important;
+    border: 1px solid grey;
+    color: black;
+    font-size: 12px;
+    border-radius: unset;
+}
+
+ul.optionAll li input[type="checkbox"]:checked + label {
+    color: red;
+    transition: all .2s;
+    font-weight: bold;
+    border: 1px solid red;
+}
+
+ul.optionPrice li label {
+    background-color: white !important;
+    border: 1px solid grey;
+    color: black;
+    font-size: 12px;
+    border-radius: unset;
+}
+
+
+ul.optionPrice li input[type="radio"]:checked + label {
+    color: red;
+    transition: all .2s;
+    font-weight: bold;
+    border: 1px solid red;
+}
+
+
+ul.optionPrice li label {
+    background-color: white !important;
+    border: 1px solid grey;
+    color: black;
+    font-size: 12px;
+    border-radius: unset;
+}
+
+
+ul.optionPrice li input[type="search"] {
+
+    border: none;
+    border-bottom: black 1px solid;
+    height: 30px;
+    width: 100px;
+    font-size: 12px;
+
+}
+
+ul.optionPrice li input[type="search"]:focus {
+
+    border-bottom: red 1px solid;
+
+}
+
+.pushSelect {
+    padding: 30px 0;
+}
+
+.getSearch {
+    color: red;
+    font-size: 32px;
+
+}
+
+.searchResult {
+    color: black;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.searchResultSub {
+    color: black;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.searchResultContainer {
+    text-align: center;
+    margin: 60px 0;
+}
+
+.solidProduct {
+    border: solid 1px black;
+    margin: 5px 0;
+}
+
+.searchProductResult {
+    margin: 70px 0;
+}
+
+#howMany {
+    font-size: 14px;
+    color: black;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.countSearch {
+    color: red;
+    font-weight: bold;
+}
+
+#reset_button {
+
+    border: 1px solid black;
+}
+
+#pagination {
+    margin-top: 50px;
+}

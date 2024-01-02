@@ -1,0 +1,117 @@
+#container{
+    padding-top: 30px;
+    min-height: 1000px;
+
+}
+
+#list{
+    width: 80%;
+    min-height: 100px;
+    margin: auto;
+}
+
+#list #totaltab .uk-active a{
+    border-bottom: black solid 1px;
+}
+
+#list #totaltab{
+    width: 100%;
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
+
+#totaltab ul{
+    justify-content: center;
+}
+
+#tablelist{
+    margin: auto;
+    width: 100%;
+}
+
+#tablelist .uk-table tr th {
+    font-weight: bold;
+    text-align: center;
+    color: black;
+}
+
+#tablelist .uk-table tr #tnum{
+    width: 10%;
+}
+
+#tablelist .uk-table tr #ttitle{
+    width: 80%;
+}
+
+#tablelist .uk-table .listnum{
+    width: 10%;
+    text-align: center;
+}
+
+#tablelist .uk-table .listtitle{
+    width: 80%;
+}
+
+#tablelist tbody:hover{
+    background-color: #eeeeee;
+}
+
+/* 
+#container {
+	padding-top: 30px;
+	min-height: 1000px;
+}
+
+#list {
+	width: 90%;
+	margin: auto;
+	padding-bottom: 20px;
+} */
+
+.boardTR {
+	font-weight: 900;
+}
+
+.boardTR, .boardList {
+	padding: 10px;
+	margin: auto;
+	border-bottom: 1px solid #f1f1f1;
+	border-top: 1px solid #f1f1f1;
+	color: black;
+	cursor: pointer;
+	position: relative;
+	height: 50px;
+}
+
+.boardTable {
+	margin: auto;
+	width: 90%;
+	text-align: center;
+	height: 10px;
+}
+
+.pageBTN {
+	width: 100%;
+	height: 40px;
+	text-align: center;
+	font-size: 16px;
+	margin-top: 40px;
+	justify-content: center;
+}
+
+.thP, .tdP, .tdPTitle {
+	padding: 10px;
+}
+
+.tdPTitle {
+	text-align: left;
+}
+
+.uk-pagination {
+	width: 100%;
+	height: 40px;
+	text-align: center;
+	font-size: 16px;
+	margin-top: 40px;
+	justify-content: center;
+}

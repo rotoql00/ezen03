@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mapper sample file 입니다. -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orderMapper">
+    <resultMap id="orderMap" type="com.ezen03.tieshoe.model.orderBeans">
+        <!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+        <result property=" ID" column=" ID "/>
+        <result property=" orderProductNum" column=" orderProductNum "/>
+        <result property=" orderNumber" column=" orderNumber "/>
+        <result property=" orderPrice" column=" orderPrice "/>
+        <result property=" orderSize" column=" orderSize "/>
+        <result property=" sell_user_ID" column=" sell_user_ID "/>
+        <result property=" buy_user_ID" column=" buy_user_ID "/>
+        <result property=" sell_ID" column=" sell_ID "/>
+        <result property=" buy_ID" column=" buy_ID "/>
+        <result property=" reg_date" column=" reg_date "/>
+        <result property=" edit_date" column=" edit_date "/>
+        <result property=" BuyOrderStatus" column=" BuyOrderStatus "/>
+        <result property=" SellOrderStatus" column=" SellOrderStatus "/>
+        <result property=" search" column=" search "/>
+        <result property=" category" column=" category"/>
+        <result property=" productName" column=" productName"/>
+        <result property=" buyer" column=" buyer"/>
+        <result property=" seller" column=" seller"/>
+        <result property=" productImg" column=" productImg"/>
+
+
+        <result property="offset" column="offset"/>
+        <result property="listCount" column="listCount"/>
+    </resultMap>
+
+    <select id="getAllOrderInfo"
+            parameterType="com.ezen03.tieshoe.model.orderBeans"
+            resultMap="orderMap">
+            SELECT o.reg_date, b.buyFee AS buy_ID, s.sellFee AS sell_ID FROM ordernum AS o
+            LEFT JOIN buy AS b ON o.buy_ID = b.ID
+            LEFT JOIN sell AS s ON o.sell_ID = s.ID
+            WHERE BuyOrderStatus != 1 AND BuyOrderStatus != 2 AND BuyOrderStatus != 8;
+    </select>
+
+    <!-- 그래프에 필요한 정보를 가져옵니다-->
+    <select id="getGraphData"
+            parameterType="com.ezen03.tieshoe.model.orderBeans"
+            resultMap="orderMap">
+            SELECT MAX(orderPrice) as orderPrice, reg_date FROM ordernum
+            WHERE BuyOrderStatus = 7 AND SellOrderStatus = 7 AND orderProductNum = #{orderProductNum}
+            group by reg_date
+            ORDER BY reg_date DESC
+            LIMIT 0,10;
+    </select>
+
+    <!-- 가장최근 거래가격 260의 가격을 불러옵니다-->
+    <select id="getRecent260"
+            parameterType="com.ezen03.tieshoe.model.orderBeans"
+            resultMap="orderMap">
+            SELECT orderPrice FROM ordernum
+            WHERE orderProductNum = #{orderProductNum} AND orderSize = 260 AND SellOrderStatus = 7
+            ORDER BY reg_date
+            LIMIT 1;
+    </select>
+
+    <select id="selectOrder"
+            parameterType="com.ezen03.tieshoe.model.orderBeans"
+            resultMap="orderMap">
+            SELECT * FROM ordernum
+            WHERE ID = #{ID};
+    </select>
+
+    <select id="getRecent265"
+            parameterType="com.ezen03.tieshoe.model.orderBeans"
+            resultMap="orderMap">
+        SELECT orderPrice FROM ordernum
+        WHERE orderProductNum = #{orderProductNum} AND orderSize = 265 AND SellOrderStatus = 7
+        ORDER BY reg_date
+        LIMIT 1;
+    </select>
+
+    <select id="getRecent270"
+            parameterType="com.ezen03.tieshoe.model.orderBeans"
+            resultMap="orderMap">
+        SELECT MIN(orderPrice)as orderPrice FROM ordernum
+        WHERE orderProductNum = #{orderProductNum} AND orderSize = 270 AND SellOrderStatus = 7
+        ORDER BY reg_date
+    </select>
+
+    <select id="getRecentHigh"
+            parameterType="com.ezen03.tieshoe.model.orderBeans"
+            resultMap="orderMap">
+        SELECT MAX(orderPrice)as orderPrice FROM ordernum
+        WHERE orderProductNum = #{orderProductNum} AND SellOrderStatus = 7
+        ORDER BY reg_date
+    </select>
+
+    <select id="getRecentLow"
+            parameterType="com.ezen03.tieshoe.model.orderBeans"
+            resultMap="orderMap">
+        SELECT MIN(orderPrice) as orderPrice FROM ordernum
+        WHERE orderProductNum = #{orderProductNum} AND SellOrderStatus = 7
+        ORDER BY reg_date
+    </select>
+
+    <select id="selectCountAll"
+            parameterType="com.ezen03.tieshoe.model.orderBeans"
+            resultType="int">
+        SELECT COUNT(*) FROM ordernum
+        <choose>
+            <when test="orderSize == 100">
+                WHERE orderProductNum = #{orderProductNum} AND SellOrderStatus = 7
+            </when>
+            <otherwise>
+                WHERE orderProductNum = #{orderProductNum} AND SellOrderStatus = 7 AND orderSize = ${orderSize};
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="getOrderAllPrice"
+            parameterType="com.ezen03.tieshoe.model.orderBeans"
+            resultMap="orderMap">
+        SELECT orderSize, orderPrice, reg_date FROM ordernum
+        <choose>
+            <when test="orderSize == 100">
+                WHERE orderProductNum = #{orderProductNum} AND SellOrderStatus = 7
+            </when>
+            <otherwise>
+                WHERE orderProductNum = #{orderProductNum} AND SellOrderStatus = 7 AND orderSize = ${orderSize}
+            </otherwise>
+        </choose>
+        ORDER BY reg_date
+
+        <if test="listCount > 0">
+            LIMIT #{offset}, #{listCount}
+        </if>
+    </select>
+
+    <select id="getChartData"
+            parameterType="com.ezen03.tieshoe.model.orderBeans"
+            resultMap="orderMap">
+        SELECT orderPrice, reg_date FROM ordernum
+        WHERE orderProductNum = #{orderProductNum} AND SellOrderStatus = 7
+        ORDER BY reg_date;
+    </select>
+
+    <select id="adminAll"
+            parameterType="com.ezen03.tieshoe.model.orderBeans"
+            resultMap="orderMap">
+        SELECT o.ID, o.ordernumber, p.productCode AS productName, p.product_thumb AS productImg, o.orderSize,
+        o.orderPrice, o.reg_date, o.BuyOrderStatus,
+        o.SellOrderStatus, u.userID AS buyer, us.userID AS seller FROM(((ordernum AS o
+        INNER JOIN user AS u ON o.sell_user_ID = u.ID)
+        INNER JOIN user AS us ON o.buy_user_ID = us.ID)
+        INNER JOIN product AS p ON o.orderProductNum = p.ID)
+        <!--
+        0 = 전체
+        1 = 주문번호
+        2 = 판매자
+        3 = 구매자
+        -->
+        <choose>
+            <when test="category == 1">
+                WHERE o.ordernumber LIKE concat('%', #{search}, '%')
+            </when>
+
+            <when test="category == 2">
+                WHERE u.userId LIKE concat('%', #{search}, '%')
+            </when>
+
+            <when test="category == 3">
+                WHERE us.userId LIKE concat('%', #{search}, '%')
+            </when>
+
+            <otherwise>
+
+            </otherwise>
+        </choose>
+        ORDER BY BuyOrderStatus = 3 AND SellOrderStatus = 3 DESC
+
+        <if test="listCount > 0">
+            LIMIT #{offset}, #{listCount}
+        </if>
+    </select>
+
+    <select id="adminAllCount"
+            parameterType="com.ezen03.tieshoe.model.orderBeans"
+            resultType="int">
+        SELECT COUNT(*) FROM(((ordernum AS o
+        INNER JOIN user AS u ON o.sell_user_ID = u.ID)
+        INNER JOIN user AS us ON o.buy_user_ID = us.ID)
+        INNER JOIN product AS p ON o.orderProductNum = p.ID)
+        <!--
+        0 = 전체
+        1 = 주문번호
+        2 = 판매자
+        3 = 구매자
+        -->
+        <choose>
+            <when test="category == 1">
+                WHERE o.ordernumber LIKE concat('%', #{search}, '%')
+            </when>
+
+            <when test="category == 2">
+                WHERE u.userId LIKE concat('%', #{search}, '%')
+            </when>
+
+            <when test="category == 3">
+                WHERE us.userId LIKE concat('%', #{search}, '%')
+            </when>
+
+            <otherwise>
+
+            </otherwise>
+        </choose>
+        ORDER BY BuyOrderStatus = 3 AND SellOrderStatus = 3 DESC
+    </select>
+
+    <select id="orderUpdate"
+            parameterType="com.ezen03.tieshoe.model.orderBeans"
+            resultType="int">
+            UPDATE ordernum
+            SET BuyOrderStatus = 4, SellOrderStatus = 4
+            WHERE ID = #{ID}
+    </select>
+
+    <select id="updateOrderStatus"
+            parameterType="com.ezen03.tieshoe.model.orderBeans"
+            resultType="int">
+            UPDATE ordernum
+            SET BuyOrderStatus = #{BuyOrderStatus}
+            WHERE ID = #{ID}
+    </select>
+
+    <select id="updateOrderStatusSell"
+            parameterType="com.ezen03.tieshoe.model.orderBeans"
+            resultType="int">
+            UPDATE ordernum
+            SET SellOrderStatus = #{SellOrderStatus}
+            WHERE ID = #{ID}
+    </select>
+
+    <select id="buyPayList"
+            parameterType="com.ezen03.tieshoe.model.orderBeans"
+            resultMap="orderMap">
+        SELECT o.ID, o.ordernumber, o.SellOrderStatus, o.reg_date, o.orderPrice, u.userName AS buyer, u.userId AS
+        seller, userAccountBank AS productImg, userAccountNum AS productName, b.buyFee AS orderSize FROM ordernum o
+        INNER JOIN user u ON o.buy_user_ID = u.ID
+        INNER JOIN buy b ON o.buy_ID = b.ID
+
+        <choose>
+            <when test="category == 1">
+                WHERE u.userId LIKE concat('%', #{search}, '%') AND BuyOrderStatus = 1
+            </when>
+
+            <when test="category == 2">
+                WHERE u.userName LIKE concat('%', #{search}, '%') AND BuyOrderStatus = 1
+            </when>
+
+            <otherwise>
+                WHERE BuyOrderStatus = 1
+            </otherwise>
+        </choose>
+        ORDER BY o.reg_date
+
+        <if test="listCount > 0">
+            LIMIT #{offset}, #{listCount}
+        </if>
+    </select>
+
+    <select id="buyPayListCount"
+            parameterType="com.ezen03.tieshoe.model.orderBeans"
+            resultType="int">
+        SELECT COUNT(*) FROM ordernum o
+        INNER JOIN user u ON o.buy_user_ID = u.ID
+        INNER JOIN buy b ON o.buy_ID = b.ID
+
+        <choose>
+            <when test="category == 1">
+                WHERE u.userId LIKE concat('%', #{search}, '%') AND BuyOrderStatus = 1
+            </when>
+
+            <when test="category == 2">
+                WHERE u.userName LIKE concat('%', #{search}, '%') AND BuyOrderStatus = 1
+            </when>
+
+            <otherwise>
+                WHERE BuyOrderStatus = 1
+            </otherwise>
+        </choose>
+
+    </select>
+
+    <select id="updateOrderBoth"
+            parameterType="com.ezen03.tieshoe.model.orderBeans"
+            resultType="int">
+            UPDATE ordernum SET BuyOrderStatus = '3', SellOrderStatus = '3'
+            WHERE ID = #{ID}
+    </select>
+
+    <select id="updateOrderPayBuy"
+            parameterType="com.ezen03.tieshoe.model.orderBeans"
+            resultType="int">
+            UPDATE ordernum
+            SET BuyOrderStatus = '2'
+            WHERE ID = #{ID}
+    </select>
+
+    <select id="sellPayList"
+            parameterType="com.ezen03.tieshoe.model.orderBeans"
+            resultMap="orderMap">
+        SELECT o.ID, o.ordernumber, o.SellOrderStatus, o.reg_date, o.orderPrice, u.userName AS buyer, u.userId AS
+        seller, userAccountBank AS productImg, userAccountNum AS productName, s.sellFee AS orderSize FROM ordernum o
+        INNER JOIN user u ON o.sell_user_ID = u.ID
+        INNER JOIN sell s ON o.sell_ID = s.ID
+
+        <choose>
+            <when test="category == 1">
+                WHERE u.userId LIKE concat('%', #{search}, '%') AND SellOrderStatus = 5
+            </when>
+
+            <when test="category == 2">
+                WHERE u.userName LIKE concat('%', #{search}, '%') AND SellOrderStatus = 5
+            </when>
+
+            <otherwise>
+                WHERE SellOrderStatus = 5
+            </otherwise>
+        </choose>
+        ORDER BY o.reg_date
+
+        <if test="listCount > 0">
+            LIMIT #{offset}, #{listCount}
+        </if>
+    </select>
+
+    <select id="sellPayListCount"
+            parameterType="com.ezen03.tieshoe.model.orderBeans"
+            resultType="int">
+        SELECT COUNT(*) FROM ordernum o
+        INNER JOIN user u ON o.sell_user_ID = u.ID
+        INNER JOIN sell s ON o.sell_ID = s.ID
+
+        <choose>
+            <when test="category == 1">
+                WHERE u.userId LIKE concat('%', #{search}, '%') AND SellOrderStatus = 5
+            </when>
+
+            <when test="category == 2">
+                WHERE u.userName LIKE concat('%', #{search}, '%') AND SellOrderStatus = 5
+            </when>
+
+            <otherwise>
+                WHERE SellOrderStatus = 5
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="updateOrderPaySell"
+            parameterType="com.ezen03.tieshoe.model.orderBeans"
+            resultType="int">
+            UPDATE ordernum
+            SET SellOrderStatus = '6'
+            WHERE ID = #{ID}
+    </select>
+
+    <insert id="insertOrder"
+            parameterType="com.ezen03.tieshoe.model.orderBeans"
+            useGeneratedKeys="true" keyProperty="ID" keyColumn="ID">
+            INSERT INTO ordernum (orderProductNum, orderNumber, orderPrice, orderSize, sell_user_ID, buy_user_ID, sell_ID, buy_ID, reg_date, BuyOrderStatus, SellOrderStatus)
+            VALUES (#{orderProductNum}, #{orderNumber}, #{orderPrice}, #{orderSize}, #{sell_user_ID}, #{buy_user_ID}, #{sell_ID}, #{buy_ID}, CURDATE(), '1', '1');
+    </insert>
+
+    <update id="terminate" parameterType="com.ezen03.tieshoe.model.buyBeans">
+            UPDATE ordernum
+            SET BuyOrderStatus = '8', SellOrderStatus = '8'
+            WHERE ID = #{ID};
+    </update>
+
+    <update id="complete" parameterType="com.ezen03.tieshoe.model.orderBeans">
+            UPDATE ordernum
+            SET BuyOrderStatus = '7', SellOrderStatus = '7'
+            WHERE ID = #{ID};
+    </update>
+
+
+    <select id="dailyIncome"
+            parameterType="com.ezen03.tieshoe.model.orderBeans"
+            resultMap="orderMap">
+            select o.reg_date, SUM(b.buyFee) as buy_ID, SUM(s.sellFee) as sell_ID  from ordernum as o
+            left join buy as b ON o.buy_ID = b.ID
+            left join sell as s ON o.sell_ID = s.ID
+            GROUP BY o.reg_date
+            ORDER BY reg_date DESC
+            LIMIT 0,21;
+    </select>
+
+</mapper>

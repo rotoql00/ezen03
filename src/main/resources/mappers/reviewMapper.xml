@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mapper sample file 입니다. -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reviewMapper">
+    <!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+    <resultMap id="reviewMap"
+               type="com.ezen03.tieshoe.model.reviewBeans">
+        <!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+        <result property="reviewNum" column="reviewNum"/>
+        <result property="reviewRating" column="reviewRating"/>
+        <result property="reviewContext" column="reviewContext"/>
+        <result property="user_ID" column="user_ID"/>
+        <result property="reg_date" column="reg_date"/>
+        <result property="edit_date" column="edit_date"/>
+        <result property="product_ID" column="product_ID"/>
+        <result property="productName" column="productName"/>
+        <result property="offset" column="offset"/>
+        <result property="listCount" column="listCount"/>
+    </resultMap>
+
+    <!-- 리뷰 단일 조회를 위한 기능 정의 -->
+    <select id="selectReview"
+            parameterType="com.ezen03.tieshoe.model.reviewBeans" resultMap="reviewMap">
+		SELECT * FROM review
+		WHERE reviewNum = #{reviewNum};
+	</select>
+
+    <!-- 동일 제품 중복 리뷰 작성 확인 기능 정의 -->
+    <select id="checkReview"
+            parameterType="com.ezen03.tieshoe.model.userBeans" resultType="int">
+		SELECT count(*) 
+		FROM tieshoe.review 
+		WHERE product_ID = #{product_ID} AND user_ID = #{user_ID};
+	</select>
+
+    <!-- 다중행 조회를 위한 기능 정의 -->
+    <select id="selectListReview" parameterType="com.ezen03.tieshoe.model.reviewBeans" resultMap="reviewMap">
+        SELECT * FROM review
+        ORDER BY reviewNum DESC
+        <if test="listCount > 0">
+            LIMIT #{offset}, #{listCount}
+        </if>
+    </select>
+
+    <!-- 유저가 작성한 리뷰 다중행 조회를 위한 기능 정의 -->
+    <select id="selectListUserReview" parameterType="com.ezen03.tieshoe.model.reviewBeans" resultMap="reviewMap">
+        SELECT * FROM review
+        WHERE user_ID = #{user_ID}
+        ORDER BY user_ID DESC
+        <if test="listCount > 0">
+            LIMIT #{offset}, #{listCount}
+        </if>
+    </select>
+
+    <!-- 제품에 작성된 리뷰 다중행 조회를 위한 기능 정의 -->
+    <select id="selectListProductReview" parameterType="com.ezen03.tieshoe.model.reviewBeans" resultMap="reviewMap">
+        SELECT
+        reviewNum,reviewRating,reviewContext,r.user_ID,
+        r.reg_date,r.edit_date,product_ID,
+        u.userId,u.userName
+        FROM review r
+        INNER JOIN user u
+        ON r.user_ID = u.ID
+        WHERE product_ID = #{product_ID}
+        ORDER BY reviewNum DESC
+        <if test="listCount > 0">
+            LIMIT #{offset}, #{listCount}
+        </if>
+    </select>
+
+    <!-- 전페 리뷰 카운트 기능 정의 -->
+    <select id="countReviewAll"
+            parameterType="com.ezen03.tieshoe.model.reviewBeans" resultType="int">
+		SELECT count(*) 
+		FROM review
+	</select>
+
+    <!-- 유저가 작성한 리뷰 카운트 기능 정의 -->
+    <select id="countUserReview"
+            parameterType="com.ezen03.tieshoe.model.reviewBeans" resultType="int">
+		SELECT count(*) 
+		FROM review
+		WHERE user_ID = #{user_ID};
+	</select>
+
+    <!-- 상품기준 작성된 리뷰 카운트 기능 정의 -->
+    <select id="countProductReview"
+            parameterType="com.ezen03.tieshoe.model.reviewBeans" resultType="int">
+		SELECT count(*) 
+		FROM review
+		WHERE product_ID = #{product_ID};
+	</select>
+
+    <!-- 상품에 유저가 리뷰를 작성했는지 찾는 기능 정의 -->
+    <select id="reviewOverlapCheck"
+            parameterType="com.ezen03.tieshoe.model.reviewBeans" resultType="int">
+		SELECT count(*) 
+		FROM review
+		WHERE product_ID = #{product_ID}
+		AND user_ID = #{user_ID};
+	</select>
+
+    <!-- 상품 평균 점수 기능 정의 -->
+    <select id="productAvgPoint"
+            parameterType="com.ezen03.tieshoe.model.reviewBeans" resultType="int">
+            SELECT  
+            AVG(reviewRating)
+            FROM review 
+            WHERE product_ID=#{product_ID};
+	</select>
+
+    <!-- 리뷰 저장을 위한 기능 정의 -->
+    <insert id="insertReview"
+            parameterType="com.ezen03.tieshoe.model.reviewBeans"
+            useGeneratedKeys="true" keyProperty="reviewNum">
+		INSERT
+		INTO review
+		( reviewRating,reviewContext,user_ID,reg_date,edit_date,product_ID )
+		VALUES
+		( #{reviewRating},#{reviewContext},#{user_ID},now(),now(),#{product_ID} );
+	</insert>
+
+    <!-- 리뷰 수정 위한 기능 정의 -->
+    <update id="updateReview"
+            parameterType="com.ezen03.tieshoe.model.reviewBeans">
+		UPDATE
+		review SET
+		reviewRating = #{reviewRating},
+		reviewContext = #{reviewContext},
+		user_ID = #{user_ID},
+		edit_date = now(),
+		product_ID = #{product_ID}
+		WHERE reviewNum = #{reviewNum};
+	</update>
+
+    <!-- 리뷰 삭제 기능 정의 -->
+    <delete id="deleteReview"
+            parameterType="com.ezen03.tieshoe.model.reviewBeans">
+			DELETE FROM review WHERE reviewNum = #{reviewNum};
+	</delete>
+
+    <select id="interestGraph" parameterType="com.ezen03.tieshoe.model.reviewBeans" resultMap="reviewMap">
+            select p.productNameKR as productName, count(*) as product_ID from review as r
+            inner join product as p ON r.product_ID = p.ID
+            group by r.product_ID
+            order by count(*) desc
+            LIMIT 0,5;
+    </select>
+
+</mapper>

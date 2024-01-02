@@ -1,0 +1,784 @@
+/*
+FileName: buy.css
+Description: buy에 대한 CSS입니다.
+Author: 임석현
+*/
+
+img {
+    width: 80%;
+}
+
+#container {
+    width: 100%;
+    margin: 100px;
+    height: 1200px;
+}
+
+
+.product_title-fake {
+    display: none;
+}
+
+/*이미지를 품고있는 container */
+.left_container {
+    float: left;
+    width: 50%;
+}
+
+
+/*상품 이름 */
+#product_name {
+    line-height: 30px;
+    font-size: 21px;
+    font-weight: bold;
+    float: right;
+    margin-right: 26%;
+}
+
+/*상품 이름(한국어)*/
+#product_name_ko {
+    clear: both;
+    line-height: 30px;
+    font-size: 13px;
+    float: right;
+    margin-right: 26%;
+}
+
+.buy_information p {
+    text-align: right;
+    margin-right: 26%;
+    font-size: 12px;
+}
+
+/*이미지 외 나머지 info를 담고있는 container*/
+.right_container {
+    float: left;
+    width: 35%;
+}
+
+.buy_title {
+    font-size: 30px;
+    font-weight: lighter;
+    color: black;
+}
+
+.buy_left, .buy_right {
+    margin-top: 40px;
+    display: inline-block;
+}
+
+.option {
+    width: 100%;
+}
+
+.buy_left {
+    display: inline-block;
+    margin-right: 20px;
+    font-size: 12px;
+}
+
+.option_adjustment {
+    display: inline-block;
+    width: 85%;
+    float: left;
+    color: black;
+    margin-bottom: 10px;
+}
+
+.buy_right {
+    display: inline-block;
+    float: left;
+    width: 15%;
+    margin-bottom: 10px;
+}
+
+
+.option_font_size {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.option_font {
+    font-size: 14px;
+    font-weight: bolder;
+    margin: auto;
+}
+
+
+.buy_edit_size {
+    border: none;
+    background-color: unset;
+    font-size: 15px;
+    color: #4c69af;
+    float: right;
+    cursor: pointer;
+}
+
+/*시세확인 줄의 */
+.product_allprice {
+    width: 100%;
+}
+
+/*시세확인줄 %를 주기위한 CSSs*/
+.option_2_adjustment {
+    width: 85%;
+    float: left;
+    color: black;
+}
+
+/* 옵션별 가격의 줄을 설정합니다*/
+.option_2 {
+    float: left;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 15px 0 15px 0;
+    width: 15%;
+    color: black;
+}
+
+/* 거래가격 판매가현황 입찰가현황을 설정합니다.*/
+.current_status {
+    float: right;
+    font-size: 13px;
+    border: none;
+    background-color: unset;
+    cursor: pointer;
+    margin: 12px 0 0 10px;
+}
+
+/*입찰가격 라인에 대한 CSS*/
+.buy_first_input {
+    margin-top: 30px;
+}
+
+/*이 페이지에 모든 인풋타입에 대한 속성입니다.*/
+.buy_all_input {
+    background-color: transparent;
+    box-sizing: border-box;
+    border: 2px solid #d1edd9;
+    border-radius: 4px;
+    font-size: 16px;
+    padding: 12px 20px 12px 35px;
+    outline: none;
+    width: 100%;
+}
+
+/*인풋 입찰 가격에 대한 CSS입니다*/
+.buy_final_price {
+    float: left;
+    display: inline-block;
+    color: green;
+    margin-top: 15px;
+    width: 18%;
+}
+
+/*인풋 사이즈 조정*/
+.buy_input_price {
+    float: right;
+    width: 82%;
+}
+
+/*인풋에 포커스를 줍니다(클릭시에 파란색으로 변합니다)*/
+.buy_input_price_text:focus {
+    border-color: #57e680;
+}
+
+/*인풋안에있는 "원"표시에 대한 코드*/
+.won {
+    position: absolute;
+    margin-top: 11px;
+    margin-left: 15px;
+    font-weight: bold;
+    color: #767676;
+    font-size: 18px;
+}
+
+/*바로 구매가격 전체 container*/
+.buy_instance_info {
+    float: right;
+    margin: 15px 0;
+}
+
+/*바로구매 텍스트*/
+.buy_instance_price {
+    display: inline-block;
+    color: green;
+    font-size: 15px;
+}
+
+/*자바스크립트로 가져온 값에 대한  CSS*/
+.buy_instance_get {
+    display: inline-block;
+    font-size: 15px;
+}
+
+/*배송비 container*/
+.buy_shipping_price_container {
+    margin: 17px 0 17px;
+    color: black;
+}
+
+/*배송비 텍스트 폰트 조정*/
+.buy_shipping_price_text {
+    display: inline-block;
+    float: left;
+    font-weight: bold;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+/*가격 텍스트 폰트 조정*/
+.buy_shipping_price {
+    display: inline-block;
+    float: right;
+    font-weight: bold;
+    margin-bottom: 17px;
+}
+
+.buy_coupon_dropdown {
+    display: inline-block;
+    float: right;
+    margin-bottom: 20px;
+}
+
+.buy_shipping_totalprice_text {
+    display: inline-block;
+    float: left;
+    font-weight: bold;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.buy_shipping_totalprice {
+    display: inline-block;
+    float: right;
+    font-weight: bold;
+    color: green;
+    font-size: 19px;
+    margin: 10px 0;
+}
+
+/*입찰 마감일*/
+.buy_bidDate {
+    margin: 70px 0 10px;
+    color: black;
+}
+
+.buy_bidDate_text {
+    display: inline-block;
+    float: left;
+    font-weight: bold;
+    font-size: 12px;
+    margin-top: 8px;
+    width: 20%;
+}
+
+.buy_bidDate_dropdown {
+    float: left;
+    width: 120px;
+    margin-bottom: 17px;
+}
+
+/*배송*/
+.buy_address_container {
+    margin: 20px 0;
+}
+
+.buy_address {
+    width: 20%;
+    float: left;
+    font-weight: bold;
+    font-size: 12px;
+    margin-top: 5px;
+    color: black;
+}
+
+.buy_address_info {
+    float: left;
+    width: 70%;
+    line-height: 25px;
+    font-size: 15px;
+    /*정렬 줄 바꿈*/
+    word-break: keep-all;
+    margin-bottom: 15px;
+}
+
+/*마지막 서밋 입찰 과 취소에 대한 CSS*/
+
+.buy_submit_container {
+    width: 100%;
+    margin: 40px 0;
+}
+
+.buy_submit {
+    width: 50%;
+    display: inline-block;
+}
+
+.buy_cancel {
+    float: left;
+    width: 50%;
+    display: inline-block;
+}
+
+.buy_cancel_button {
+    background-color: #797979;
+    color: white;
+    cursor: pointer;
+}
+
+.buy_submit_button {
+    float: right;
+    background-color: green;
+    color: white;
+}
+
+.buy_submit_button, .buy_cancel_button {
+    width: 95%;
+    height: 45px;
+    border: none;
+    border-radius: 3px;
+}
+
+
+/*1436px 미만으로 내려갔을떄 깨짐을 정리하기 위한 CSS*/
+@media (max-width: 1436px) {
+    .buy_left {
+        display: inline-block;
+        margin-right: 20px;
+        font-size: 10px;
+    }
+
+    .option_font_size {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .option_font {
+        font-size: 12px;
+        font-weight: bolder;
+        margin: auto;
+    }
+
+    .buy_edit_size {
+        border: none;
+        background-color: unset;
+        font-size: 13px;
+        color: #4c69af;
+        float: right;
+    }
+}
+
+/* 1070 이하로 내려갔을때 이름 위로 올리기*/
+@media (max-width: 1070px) {
+    #container {
+        width: 100%;
+        margin: auto;
+    }
+
+    .left_container {
+        width: auto;
+        /* 이미지가 밑에 있어 위로 떙겼습니다*/
+        margin-top: 100px;
+        margin-left: 20%;
+    }
+
+    /*이미지 외 나머지 info를 담고있는 container*/
+    .right_container {
+        width: 80%;
+        text-align: center;
+        margin-left: 10%;
+    }
+
+    .product_title {
+        display: none;
+    }
+
+    .product_title-fake {
+        width: 100%;
+        margin-top: 50px;
+        display: block;
+        text-align: center;
+    }
+
+    #product_name_fake {
+        line-height: 30px;
+        font-size: 21px;
+        font-weight: bold;
+    }
+
+    /*상품 이름(한국어)*/
+    #product_name_ko_fake {
+        line-height: 50px;
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+
+}
+
+.buy_hr_bold {
+    width: 100%;
+    border: .5px solid black;
+    clear: both;
+    margin: 0px;
+}
+
+.buy_hr_fade {
+    width: 100%;
+    border: .5px solid #cae8e5;
+    clear: both;
+    margin: 0px;
+}
+
+/******************************** BUY popup*******************************************/
+.buy_contentBuy {
+    text-align: left;
+    margin: 25px 50px 50px;
+    font-size: 27px;
+    color: white;
+    z-index: 999;
+}
+
+.buyPopup {
+    text-align: center;
+    max-width: 800px;
+    margin: auto;
+    background: #4caf50;
+    position: relative;
+    min-height: 1400px;
+    box-shadow: 4px -4px 11px 9px #555555;
+    z-index: 999;
+}
+
+
+.popupline_white {
+    border-left: 4px solid white;
+    height: 45px;
+    margin-left: 50px;
+}
+
+.close_white {
+    position: absolute;
+    right: 25px;
+    top: 25px;
+    width: 50px;
+    height: 50px;
+}
+
+.close_white:before, .close_white:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 70px;
+    width: 1px;
+    background-color: white;
+}
+
+.close_white:before {
+    transform: rotate(45deg);
+}
+
+.close_white:after {
+    transform: rotate(-45deg);
+}
+
+.buy_table {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+}
+
+.buy_table tr {
+    color: white;
+    text-align: center;
+}
+
+.buy_table tr td, .buy_table tr th {
+    padding-top: 20px;
+    padding-bottom: 25px;
+}
+
+.buy_table tbody tr:nth-of-type(even) {
+    background: #76b852;
+}
+
+.buy_table tbody tr:hover td {
+    background: #509e2f;
+
+}
+
+/******************************** BUY popup 끝*******************************************/
+/******************************** SELL popup*******************************************/
+.sell_contentSell {
+    text-align: left;
+    margin: 25px 50px 50px;
+    font-size: 27px;
+    color: white;
+}
+
+.sellPopup {
+    text-align: center;
+    max-width: 800px;
+    margin: auto;
+    background: #ff5a5f;
+    position: relative;
+    min-height: 1400px;
+    box-shadow: 4px -4px 11px 9px #555555
+}
+
+.sell_table {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+}
+
+.sell_table tr {
+    color: white;
+    text-align: center;
+}
+
+.sell_table tr td, .sell_table tr th {
+    padding-top: 20px;
+    padding-bottom: 25px;
+}
+
+.sell_table tbody tr:nth-of-type(even) {
+    background: #f7786b;
+}
+
+.sell_table tbody tr:hover td {
+    background: #e63946;
+}
+
+/******************************** SELL popup 끝*******************************************/
+/******************************** 이용안내 popup*******************************************/
+/* 팝업의 백그라운드 입니다.*/
+.Popup_Wrapper {
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: none;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    padding: 100px 0;
+    z-index: 10;
+}
+
+/*팝업의 크기를 설정합니다.*/
+.Popup {
+    z-index: 999;
+    text-align: center;
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    position: relative;
+    min-height: 500px;
+    box-shadow: 4px -4px 11px 9px #555555;
+}
+
+/*X 나가기 버튼입니다.*/
+.close {
+    position: absolute;
+    right: 25px;
+    top: 25px;
+    width: 50px;
+    height: 50px;
+    opacity: 0.3;
+}
+
+.close:hover {
+    opacity: 1;
+}
+
+.close:before, .close:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 70px;
+    width: 1px;
+    background-color: black;
+}
+
+.close:before {
+    transform: rotate(45deg);
+}
+
+.close:after {
+    transform: rotate(-45deg);
+}
+
+/*데코레이션 상단에 줄을 그어줍니다*/
+.popupline {
+    border-left: 4px solid black;
+    height: 45px;
+    margin-left: 50px;
+}
+
+/* 팝업 상단 제목에 대한 속성입니다*/
+.userGuidePopupContent h1 {
+    text-align: left;
+    margin: 25px 50px 50px;
+    font-size: 27px;
+}
+
+/*이용안내 png를 가져옵니다.*/
+.userGuidePopupContent img {
+    padding-bottom: 100px;
+}
+
+/********************************************************************************/
+/******************************판매가에 대한 팝업*********************************/
+/*판매가 팝업에 대한 설정입니다*/
+.Popup_Wrapper_current {
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: none;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    padding: 30px;
+    z-index: 10;
+}
+
+/*팝업의 크기를 설정합니다.*/
+.Popup_current {
+    text-align: center;
+    max-width: 470px;
+    margin: auto;
+    background: white;
+    position: relative;
+    min-height: 1000px;
+    box-shadow: 4px -4px 11px 9px #555555
+}
+
+/*제목에 대한 CSS구문입니다.*/
+.current_statusPopupContent h1 {
+    text-align: left;
+    margin: 25px 50px 50px;
+    font-size: 27px;
+}
+
+/* 탭에 대한 설정 CSS입니다*/
+.tabbed {
+    width: 600px;
+    margin: 90px 0 0 65px;
+}
+
+/* radio에 대한 CSS설정입니다.*/
+.tabbed > input {
+    display: none;
+}
+
+/* radio 속성과 연결된 label에 대한 설정입니다.*/
+.tabbed > label {
+    display: block;
+    float: left;
+    padding: 17px 30px;
+    margin: 0 2px 20px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: 1px solid black;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+/*탭에 hover했을떄 나는 효과 입니다. 체크를 했을시에는 고정됩니다.*/
+.tabbed > label:hover, .tabbed > input:checked + label {
+    background: black;
+    color: white;
+}
+
+/* context 본문영역에대한 조정입니다.*/
+.product_tabs {
+    clear: both;
+    perspective: 300px;
+    text-align: center;
+}
+
+/* context 본문영역에대한 조정입니다.*/
+.product_tabs > div {
+    width: 340px;
+    position: absolute;
+    line-height: 1.4em;
+    opacity: 0;
+    transform: rotateX(-20deg);
+    transform-origin: top center;
+    transition: opacity 0.3s, transform 1s;
+    margin-left: 1px;
+    text-align: center;
+}
+
+.product_tabs table {
+    width: 100%;
+}
+
+
+/*클릭시 전환시켜주는 CSS 구문입니다.*/
+#tab-nav-1:checked ~ .product_tabs > div:nth-of-type(1),
+#tab-nav-2:checked ~ .product_tabs > div:nth-of-type(2),
+#tab-nav-3:checked ~ .product_tabs > div:nth-of-type(3) {
+    transform: rotateX(0);
+    opacity: 1;
+    z-index: 1;
+}
+
+.product_tabs table tr {
+    text-align: center;
+}
+
+.product_tabs table tr th {
+    font-weight: bold;
+    font-size: 12px;
+    padding: 8px;
+}
+
+.product_tabs table tr td {
+    font-size: 13px;
+    padding: 14px;
+}
+
+.product_tabs table tr th, .product_tabs table tr td {
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid black;
+}
+
+.product_option {
+    clear: both;
+    float: left;
+}
+
+/***************************판매가에 대한 팝업 끝*************************************/
+
+.bold {
+    font-weight: bold;
+}
+
+.checkbox {
+    margin: 30px 0 30px;
+}
+
+.info {
+    margin-top: 40px;
+    text-align: center;
+}
+
+div .buy_final_submit_button {
+    background-color: green;
+    color: white;
+}
+
+.couponApplied {
+    color: red;
+    text-decoration: line-through;
+}
+
+.selectric .label {
+    font-size: 14px !important;
+}
