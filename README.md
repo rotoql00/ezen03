@@ -73,7 +73,7 @@
 
 
 #### user 관리 
- @RequestMapping | location 
+ 항목 | 내용 
 |----|----|
 |관리인 아이디|admin1, admin2, admin3, super(최고관리자)|
 |일반 유저 아이디|rotoql|
