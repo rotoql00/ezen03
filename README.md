@@ -73,6 +73,12 @@
 
 
 #### user 관리 
+ @RequestMapping | location 
+|----|----|
+|/관리인 아이디|admin1, admin2, admin3, super(최고관리자)|
+|/일반 유저 아이디|rotoql|
+|/로컬 실행시 가입 활동 가능|통합 PW : 123456|
+
    |----|----|
    |/관리인 아이디|admin1, admin2, admin3, super(최고관리자)|
    |/일반 유저 아이디|rotoql|
