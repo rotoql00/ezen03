@@ -1,6 +1,13 @@
 ## EZEN03
 
 
+#### 포트폴리오 웹페이지  
+ 항목 | 내용 
+|----|----|
+|ngrok 서버|[https://3168-122-41-53-2.ngrok-free.app/|
+|localtunnel 서버|https://plain-onions-glow.loca.lt/|
+
+
 
 #### 포트폴리오 테스트 평가용 user  
  항목 | 내용 
