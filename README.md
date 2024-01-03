@@ -5,7 +5,7 @@
  항목 | 내용 
 |----|----|
 |ngrok 서버|https://3168-122-41-53-2.ngrok-free.app/|
-|localtunnel 서버|https://plain-onions-glow.loca.lt/|
+<!--|localtunnel 서버|https://plain-onions-glow.loca.lt/|-->
 
 
 
