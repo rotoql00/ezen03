@@ -4,7 +4,7 @@
 #### 포트폴리오 웹페이지  
  항목 | 내용 
 |----|----|
-|ngrok 서버|[https://3168-122-41-53-2.ngrok-free.app/|
+|ngrok 서버|https://3168-122-41-53-2.ngrok-free.app/|
 |localtunnel 서버|https://plain-onions-glow.loca.lt/|
 
 
