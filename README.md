@@ -17,6 +17,9 @@
 |회원가입 및 활동 가능|통합 PW : 123456|
 
 
+![web_login_erpPage](https://github.com/rotoql00/ezen03/assets/56528619/61363a99-b1f8-49e3-b5e8-93d5a5d37111)
+
+
 ### Resource information
    1000commit 달성!
     <resources mapping="/assets/**" location="/WEB-INF/views/assets/"/>
