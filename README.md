@@ -1,11 +1,11 @@
 ## B2C 전자정부 표준프레임워크 팀 프로젝트 포트폴리오
 
 
-## 서버안정화를 위해 잠시 로컬 서버를 닫습니다.
+
 #### 포트폴리오 웹페이지  
  항목 | 내용 
 |----|----|
-|ngrok 서버|https://3168-122-41-53-2.ngrok-free.app/|
+|ngrok 서버|https://3eea-122-41-53-2.ngrok-free.app|
 <!--|localtunnel 서버|https://plain-onions-glow.loca.lt/|-->
 
 
