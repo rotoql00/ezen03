@@ -5,7 +5,7 @@
 #### 포트폴리오 웹페이지  
  항목 | 내용 
 |----|----|
-|ngrok 서버|https://3eea-122-41-53-2.ngrok-free.app|
+|개인블로그|[프로젝트](https://rotoql00.github.io/)|
 <!--|localtunnel 서버|https://plain-onions-glow.loca.lt/|-->
 
 
